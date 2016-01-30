@@ -333,7 +333,7 @@ MonoBehaviour:
   playerInSight: 0
   player: {fileID: 0}
   enemyHealth: 10
-  attackThreshold_maxValue: 1
+  attackThreshold_maxValue: 4
   enemyDamage: 10
 --- !u!50 &640206823
 Rigidbody2D:
@@ -403,7 +403,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 640206821}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.115, y: 1.193, z: 0}
+  m_LocalPosition: {x: 4.94, y: 3.61, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 519272005}
@@ -516,7 +516,7 @@ MonoBehaviour:
   playerInSight: 0
   player: {fileID: 0}
   enemyHealth: 10
-  attackThreshold_maxValue: 1
+  attackThreshold_maxValue: 4
   enemyDamage: 10
 --- !u!1 &783265182
 GameObject:
@@ -696,7 +696,7 @@ MonoBehaviour:
   playerInSight: 0
   player: {fileID: 0}
   enemyHealth: 10
-  attackThreshold_maxValue: 1
+  attackThreshold_maxValue: 4
   enemyDamage: 10
 --- !u!50 &1001983779
 Rigidbody2D:
@@ -914,7 +914,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1484933775}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.61, y: 0, z: 0}
+  m_LocalPosition: {x: -3.41, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -945,9 +945,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0.00000011920929, y: 0}
+  m_Offset: {x: -0.00000023841858, y: -0.022767067}
   serializedVersion: 2
-  m_Size: {x: 1.0285683, y: 1.05}
+  m_Size: {x: 0.98147225, y: 1.0044658}
 --- !u!50 &1484933780
 Rigidbody2D:
   serializedVersion: 2
