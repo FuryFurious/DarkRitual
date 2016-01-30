@@ -31,7 +31,7 @@ public class WorldGenerator : MonoBehaviour
         
         }
 
-        else if (Input.GetKeyDown(KeyCode.W))
+        else if (Input.GetKeyDown(KeyCode.P))
         {
             if (worldGenerator != null)
             {
@@ -40,14 +40,7 @@ public class WorldGenerator : MonoBehaviour
             }
         }
 
-        else if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (worldGenerator != null)
-            {
-                worldGenerator.DoStep();
-                CreateLevelFromMap();
-            }
-        }
+
 	}
 
     public GameObject[] tilabeObstacles;
@@ -81,6 +74,7 @@ public class WorldGenerator : MonoBehaviour
                  
                 else
                 {
+
                     int id = world.GetNeighbourInfo(i, j);
                     newTile = (GameObject)GameObject.Instantiate(tilabeObstacles[id]);
                 }

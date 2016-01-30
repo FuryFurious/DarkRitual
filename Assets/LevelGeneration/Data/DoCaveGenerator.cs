@@ -12,10 +12,7 @@ public class DoCaveGenerator
     public int deathLimit;
 
 
-    void Start()
-    {
-        base.Start();
-    }
+
 
 
     protected override void MyInit()

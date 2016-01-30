@@ -33,6 +33,8 @@ public class PortalStoneTarget : MonoBehaviour {
         Debug.Assert(particleSystem);
 
         totalTimeToFade = timeToFade;
+
+        Debug.Assert(manager);
     }
 
 
@@ -49,7 +51,7 @@ public class PortalStoneTarget : MonoBehaviour {
 
             if (timeToFade <= 0)
             {
-                
+                manager.AddColor(this.targetColor);
             }
         }
     }
@@ -59,9 +61,14 @@ public class PortalStoneTarget : MonoBehaviour {
         if (other.tag == "Player")
         {
            PortalStoneHolder holder = other.gameObject.GetComponent<PortalStoneHolder>();
-
            Debug.Assert(holder != null);
-           triggered = true;
+           if ((holder.color & this.targetColor) != PortalColor.None)
+           {
+               triggered = true;
+           }
+
+     
+          
 
         }
     }
