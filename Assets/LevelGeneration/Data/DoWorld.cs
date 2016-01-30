@@ -109,8 +109,9 @@ public class DoWorld
             info |= NeighbourInfo.Right;
         }
 
-
         return (int)info;
     }
+
+
 
 }

@@ -6,7 +6,7 @@ using System;
 public class PortalStoneTarget : MonoBehaviour {
 
     public float timeToFade;
-    public PortalStoneManager manager;
+    private PortalStoneManager manager;
 
     private float totalTimeToFade;
 
@@ -34,6 +34,7 @@ public class PortalStoneTarget : MonoBehaviour {
 
         totalTimeToFade = timeToFade;
 
+        manager = gameObject.transform.parent.GetComponent<PortalStoneManager>();
         Debug.Assert(manager);
     }
 

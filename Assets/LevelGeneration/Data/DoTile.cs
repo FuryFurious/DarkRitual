@@ -10,6 +10,7 @@ public class DoTile
 
     public enum TileType { Empty, Obstacle }
 
+
     public DoTile(int x, int y)
     {
         X = x;
