@@ -18,7 +18,7 @@ public class EnemyBehaviour : MonoBehaviour {
 	Vector3 nullMovement3 = new Vector3 (0, 0, 0);
 
 	// Attack variables
-	public float attackThreshold_maxValue = 1;
+	public float attackThreshold_maxValue = 4;
 	float attackThreshold;
 	public int enemyDamage = 10;
 
@@ -39,21 +39,25 @@ public class EnemyBehaviour : MonoBehaviour {
 	}
 
 	void FixedUpdate () {
+		attackThreshold -= Time.deltaTime;
+		if (attackThreshold < 0)
+			attackThreshold = 0;
+
 		// Run towards Player if in sight. Does only work with 1 Player right now
 		if (playerInSight) {
 			var heading = player.transform.position - gameObject.transform.position;
 			var distance = heading.magnitude;
-			//Debug.Log (distance);
-			/*
-			if (distance > 1.5f){
-				// Attack
-				if (attackThreshold < 1) {
+
+			// Attack
+			if (distance < 1.5f){
+
+				if (attackThreshold < 0.1f) {
 					player.GetComponent<PlayerController>().playerHealth-= enemyDamage;
-
+					attackThreshold += attackThreshold_maxValue;
 				}
-
 			}
-			*/
+
+			// Hold distance. Is already done via colliders
 			if (distance > 1f){
 				Vector3 direction = heading / distance;
 				direction.z = 0;
