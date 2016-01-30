@@ -33,6 +33,8 @@ public class PortalStoneTarget : MonoBehaviour {
         Debug.Assert(particleSystem);
 
         totalTimeToFade = timeToFade;
+
+        Debug.Assert(manager);
     }
 
 
