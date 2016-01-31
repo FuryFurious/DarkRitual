@@ -18,6 +18,6 @@ public class Movement : MonoBehaviour {
 
 	void FixedUpdate () {
 
-		gameObject.transform.Translate (direction.x * Bulletspeed * Time.deltaTime, direction.y * Bulletspeed * Time.deltaTime, 0);
+		gameObject.transform.position +=  new Vector3(direction.x * Bulletspeed * Time.deltaTime, direction.y * Bulletspeed * Time.deltaTime, 0);
 	}
 }

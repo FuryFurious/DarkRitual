@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Obstacle
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -44,4 +45,7 @@ TagManager:
     locked: 0
   - name: DynamicLayer
     uniqueID: 2280943965
+    locked: 0
+  - name: TopLayer
+    uniqueID: 3768565045
     locked: 0

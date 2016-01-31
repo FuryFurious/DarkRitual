@@ -41,6 +41,9 @@ public class PlayerController : MonoBehaviour {
 		if (Input.GetMouseButtonUp (0)) {
 			GameObject spawnedBulled = (GameObject)GameObject.Instantiate (bulletPrefab, gameObject.transform.position, Quaternion.identity);
 			spawnedBulled.GetComponent<Movement> ().direction = direction; 
+
+//            Mathf.Atan2(direction.y, direction.x);
+            spawnedBulled.transform.rotation = Quaternion.Euler(0.0f, 0.0f, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90.0f);
 		}
 			
 

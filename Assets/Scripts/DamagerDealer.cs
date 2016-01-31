@@ -9,11 +9,6 @@ public class DamagerDealer : MonoBehaviour {
 
     public bool removeOnCollision = true;
 
-    void OnCollisionStay2D(Collision2D collider)
-    {
-        HandleDamageStuff(collider.collider);
-   
-    }
 
     void OnTriggerStay2D(Collider2D collider)
     {
@@ -35,6 +30,9 @@ public class DamagerDealer : MonoBehaviour {
             if (health)
             {
                 health.ReceiveDamage(damage);
+
+                if (removeOnCollision)
+                    GameObject.Destroy(gameObject);
 
                 if (health.health <= 0)
                 {
