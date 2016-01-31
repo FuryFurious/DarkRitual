@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class EnemyBehaviour : MonoBehaviour {
 
 	public bool playerInSight = false;
@@ -9,6 +10,8 @@ public class EnemyBehaviour : MonoBehaviour {
 	public GameObject player;
 
     public Animator animator;
+
+    private SpriteRenderer spriteRenderer;
 
 	public int enemyHealth = 50;
 
@@ -36,6 +39,11 @@ public class EnemyBehaviour : MonoBehaviour {
 		movementDirection = GetNewDirection ();
 
 		attackThreshold = attackThreshold_maxValue;
+
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        Debug.Assert(spriteRenderer);
 	}
 
 
@@ -71,13 +79,18 @@ public class EnemyBehaviour : MonoBehaviour {
 			if (distance > 1f){
 				Vector3 direction = heading / distance;
 				direction.z = 0;
+
+                HandleFlip(direction);
 				gameObject.transform.Translate (direction * Time.deltaTime * speed);
-           
+                animator.SetBool("IsMoving", true);
 			}
 
-            animator.SetBool("IsMoving", true);
+      
 		} 
 		else {
+
+            HandleFlip(movementDirection);
+
 			gameObject.transform.Translate (movementDirection * Time.deltaTime * speed, 0);
 			movementTime -= Time.deltaTime;
 			if (movementTime < 0) {
@@ -97,7 +110,18 @@ public class EnemyBehaviour : MonoBehaviour {
 			}
 
 		}
+
+
 	}
+
+    private void HandleFlip(Vector2 movement)
+    {
+        if (movement.x < 0.0f)
+            spriteRenderer.flipX = false;
+
+        else if (movement.x > 0.0f)
+            spriteRenderer.flipX = true;
+    }
 
 	Vector2 GetNewDirection(){
 

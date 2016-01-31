@@ -60,7 +60,7 @@ public class EnemyBehaviour_Ranged : MonoBehaviour {
 			var distance = heading.magnitude;
 
 
-
+            /*
 			if (attackThreshold < 0.1f) {
 				GameObject spawnedBulled = (GameObject)GameObject.Instantiate (bulletPrefab, gameObject.transform.position, Quaternion.identity);
 				Vector3 direction = heading / distance;
@@ -72,7 +72,7 @@ public class EnemyBehaviour_Ranged : MonoBehaviour {
 				//player.GetComponent<Hea>().playerHealth-= enemyDamage;
 				attackThreshold += attackThreshold_maxValue;
 			}
-
+            */
 
 			// Attack
 			if (distance < 1.5f){
