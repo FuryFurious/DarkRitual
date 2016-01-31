@@ -173,6 +173,9 @@ public abstract class DoAbstractWorldGenerator
                         spawner.manager = manager;
                         spawner.enemies = enemyPrefabs;
 
+
+                        obj.GetComponent<Health>().renderer = sprite.GetComponent<SpriteRenderer>();
+
                         portalCount++;
                     }
                 }
