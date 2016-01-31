@@ -9,6 +9,7 @@ public class EnemyBehaviour_Ranged : MonoBehaviour {
 	[HideInInspector]
 	public GameObject player;
 	public GameObject bulletPrefab;
+	private SpriteRenderer spriteRenderer;
 
 	public Animator animator;
 
@@ -40,6 +41,7 @@ public class EnemyBehaviour_Ranged : MonoBehaviour {
 
 		attackThreshold = attackThreshold_maxValue;
 		animator = GetComponent<Animator> ();
+		spriteRenderer = gameObject.GetComponent<SpriteRenderer> ();
 	}
 
 
@@ -86,9 +88,11 @@ public class EnemyBehaviour_Ranged : MonoBehaviour {
 				Vector3 direction = heading / distance;
 				direction.z = 0;
 				gameObject.transform.Translate (-direction * Time.deltaTime * speed);
+				HandleFlip(direction);
 			} 
 			else {
 				gameObject.transform.Translate (movementDirection * Time.deltaTime * speed, 0);
+				HandleFlip(movementDirection);
 				movementTime -= Time.deltaTime;
 				if (movementTime < 0) {
 					if (Random.Range (0, 3) > 0)
@@ -111,6 +115,7 @@ public class EnemyBehaviour_Ranged : MonoBehaviour {
 		} 
 		else {
 			gameObject.transform.Translate (movementDirection * Time.deltaTime * speed, 0);
+			HandleFlip(movementDirection);
 			movementTime -= Time.deltaTime;
 			if (movementTime < 0) {
 				if (Random.Range (0, 2) < 1)
@@ -127,8 +132,16 @@ public class EnemyBehaviour_Ranged : MonoBehaviour {
 
 				movementTime = movementRange;
 			}
-
 		}
+	}
+
+	private void HandleFlip(Vector2 movement)
+	{
+		if (movement.x < 0.0f)
+			spriteRenderer.flipX = false;
+
+		else if (movement.x > 0.0f)
+			spriteRenderer.flipX = true;
 	}
 
 	Vector2 GetNewDirection(){
