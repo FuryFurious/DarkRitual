@@ -233,6 +233,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInSight: 0
   player: {fileID: 0}
+  animator: {fileID: 9533766}
   enemyHealth: 10
   attackThreshold_maxValue: 4
   speed: 0.5
@@ -297,6 +298,10 @@ Prefab:
       propertyPath: renderer
       value: 
       objectReference: {fileID: 21220700}
+    - target: {fileID: 0}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 9533766}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 179902}
