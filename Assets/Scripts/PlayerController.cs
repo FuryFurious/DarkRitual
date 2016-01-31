@@ -1,12 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour {
 
 	public int playerHealth = 100;
-	public float speed = 1f;
+	public float speed = 2f;
 	SpriteRenderer sprite;
 	public GameObject bulletPrefab;
+
+	public List<GameObject> enemyList = new List<GameObject> ();
+
 
 	public Vector3 mousePosition = new Vector3(0,0,0);
 

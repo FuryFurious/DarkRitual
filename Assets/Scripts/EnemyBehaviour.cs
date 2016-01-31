@@ -6,7 +6,7 @@ public class EnemyBehaviour : MonoBehaviour {
 	public bool playerInSight = false;
 	public GameObject player;
 
-	public int enemyHealth = 10;
+	public int enemyHealth = 50;
 
 	// Movement variables
 	float movementRange = 1;
@@ -22,7 +22,7 @@ public class EnemyBehaviour : MonoBehaviour {
 	float attackThreshold;
 	public int enemyDamage = 10;
 
-	float speed = 0.5f;
+	public float speed = 1.0f;
 
 	// Use this for initialization
 	void Start () {
