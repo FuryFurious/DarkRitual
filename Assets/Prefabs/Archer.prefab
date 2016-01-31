@@ -207,8 +207,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInSight: 0
+  playerDistance: 5
   player: {fileID: 0}
   bulletPrefab: {fileID: 0}
+  animator: {fileID: 0}
   enemyHealth: 10
   attackThreshold_maxValue: 4
   speed: 0.5
@@ -247,7 +249,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: c4cb05e53500c5a499d9fb469fde1e73, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -282,6 +284,10 @@ Prefab:
       propertyPath: speed
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c4cb05e53500c5a499d9fb469fde1e73, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 140906}

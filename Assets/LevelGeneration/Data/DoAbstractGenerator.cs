@@ -102,6 +102,9 @@ public abstract class DoAbstractWorldGenerator
 
         int portalCount = 0;
 
+
+
+
         for (int i = 0; i < CurWorld.WorldWidth; i++)
         {
             for (int j = 0; j < CurWorld.WorldHeight; j++)
@@ -162,6 +165,9 @@ public abstract class DoAbstractWorldGenerator
                     if (portalCount < PortalStoneTarget.NUM_COLORS)
                     {
                         GameObject obj = manager.MyInstantiateObject(smallPortal, i, j, false);
+
+                        PortalConnection portalConnection = obj.GetComponent<PortalConnection>();
+                    //   portalConnection.color = (int)PortalStoneTarget.PortalColor;
 
                         // obj.ad
                         GameObject sprite = manager.MyInstantiateObject(coloredPortals[portalCount], i, j, false);

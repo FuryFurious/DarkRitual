@@ -12,6 +12,7 @@ GameObject:
   - 58: {fileID: 5826716}
   - 114: {fileID: 11424932}
   - 50: {fileID: 5034174}
+  - 114: {fileID: 11467654}
   m_Layer: 10
   m_Name: SmallPortal
   m_TagString: Enemy
@@ -76,6 +77,19 @@ MonoBehaviour:
   health: 20
   renderer: {fileID: 0}
   coloredDuration: 0.15
+--- !u!114 &11467654
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 153732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96739f5ab8a75db47a3c36caca6424a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manager: {fileID: 0}
+  color: 0
 --- !u!114 &11486828
 MonoBehaviour:
   m_ObjectHideFlags: 1

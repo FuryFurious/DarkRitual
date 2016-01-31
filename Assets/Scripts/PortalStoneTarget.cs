@@ -26,6 +26,32 @@ public class PortalStoneTarget : MonoBehaviour
         Magenta = 16 
     }
 
+    public PortalColor GetColorFromNumber(int id)
+    {
+        switch (id)
+        {
+            case 0:
+                return PortalColor.Red;
+
+            case 1:
+                return PortalColor.Blue;
+
+            case 2:
+                return PortalColor.Blue;
+
+            case 3:
+                return PortalColor.Blue;
+
+            case 4:
+                return PortalColor.Blue;
+
+            default:
+                break;
+        }
+
+        return PortalColor.None;
+    }
+
     public PortalColor targetColor;
 
 
