@@ -57,7 +57,11 @@ public class EnemyBehaviour_Ranged : MonoBehaviour {
 
 
 			if (attackThreshold < 0.1f) {
+				GameObject spawnedBulled = (GameObject)GameObject.Instantiate (bulletPrefab, gameObject.transform.position, Quaternion.identity);
+				spawnedBulled.GetComponent<Movement> ().direction = direction; 
 
+				//            Mathf.Atan2(direction.y, direction.x);
+				spawnedBulled.transform.rotation = Quaternion.Euler(0.0f, 0.0f, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90.0f);
 				//TODO: "attack"
 				//player.GetComponent<Hea>().playerHealth-= enemyDamage;
 				attackThreshold += attackThreshold_maxValue;
