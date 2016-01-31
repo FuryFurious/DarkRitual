@@ -1,12 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class EnemyBehaviour_Ranged : MonoBehaviour {
 
 	public bool playerInSight = false;
-
+	public float playerDistance = 5f;
 	[HideInInspector]
 	public GameObject player;
+	public GameObject bulletPrefab;
+
+	public Animator animator;
 
 	public int enemyHealth = 50;
 
@@ -34,6 +38,7 @@ public class EnemyBehaviour_Ranged : MonoBehaviour {
 		movementDirection = GetNewDirection ();
 
 		attackThreshold = attackThreshold_maxValue;
+		animator = GetComponent<Animator> ();
 	}
 
 
@@ -58,7 +63,8 @@ public class EnemyBehaviour_Ranged : MonoBehaviour {
 
 			if (attackThreshold < 0.1f) {
 				GameObject spawnedBulled = (GameObject)GameObject.Instantiate (bulletPrefab, gameObject.transform.position, Quaternion.identity);
-				spawnedBulled.GetComponent<Movement> ().direction = direction; 
+				Vector3 direction = heading / distance;
+				direction.z = 0;
 
 				//            Mathf.Atan2(direction.y, direction.x);
 				spawnedBulled.transform.rotation = Quaternion.Euler(0.0f, 0.0f, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90.0f);
@@ -75,20 +81,29 @@ public class EnemyBehaviour_Ranged : MonoBehaviour {
 			}
 
 			// Hold distance. Is already done via colliders
-			if (distance > 1f){
+			if (distance > playerDistance){
 				Vector3 direction = heading / distance;
 				direction.z = 0;
 				gameObject.transform.Translate (direction * Time.deltaTime * speed);
 			}
+			animator.SetBool("IsMoving", true);
 		} 
 		else {
 			gameObject.transform.Translate (movementDirection * Time.deltaTime * speed, 0);
 			movementTime -= Time.deltaTime;
 			if (movementTime < 0) {
 				if (Random.Range (0, 2) < 1)
-					movementDirection = GetNewDirection ();
+				{
+					movementDirection = GetNewDirection();
+					animator.SetBool("IsMoving", true);
+				}
+
 				else
+				{
 					movementDirection = nullMovement2;
+					animator.SetBool("IsMoving", false);
+				}
+
 				movementTime = movementRange;
 			}
 
