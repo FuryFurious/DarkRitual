@@ -11,6 +11,7 @@ public class AttentionRadius_Enemy_Ranged : MonoBehaviour {
 	{
 		GameObject playerObject = gameObject.transform.parent.gameObject;
 		enemyBehaviour_Ranged = playerObject.GetComponent<EnemyBehaviour_Ranged>();
+		gameObject.transform.parent.gameObject.GetComponent<EnemyBehaviour_Ranged> ().playerDistance = gameObject.GetComponent<CircleCollider2D> ().radius / 2;
 	}
 
 

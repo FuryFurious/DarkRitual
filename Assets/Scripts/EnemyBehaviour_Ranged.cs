@@ -5,10 +5,11 @@ using System.Collections.Generic;
 public class EnemyBehaviour_Ranged : MonoBehaviour {
 
 	public bool playerInSight = false;
-	public float playerDistance = 5f;
+	public float playerDistance;
 	[HideInInspector]
 	public GameObject player;
 	public GameObject bulletPrefab;
+	private SpriteRenderer spriteRenderer;
 
 	public Animator animator;
 
@@ -32,6 +33,7 @@ public class EnemyBehaviour_Ranged : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		//playerDistance = gameObject.transform.child gameObject.GetComponent<
 		stepMultiplier = Random.Range(1, 4);
 		movementRange *= stepMultiplier;
 		movementTime = movementRange;
@@ -39,6 +41,7 @@ public class EnemyBehaviour_Ranged : MonoBehaviour {
 
 		attackThreshold = attackThreshold_maxValue;
 		animator = GetComponent<Animator> ();
+		spriteRenderer = gameObject.GetComponent<SpriteRenderer> ();
 	}
 
 
@@ -60,19 +63,19 @@ public class EnemyBehaviour_Ranged : MonoBehaviour {
 			var distance = heading.magnitude;
 
 
-            /*
+            
 			if (attackThreshold < 0.1f) {
 				GameObject spawnedBulled = (GameObject)GameObject.Instantiate (bulletPrefab, gameObject.transform.position, Quaternion.identity);
 				Vector3 direction = heading / distance;
 				direction.z = 0;
-
+				spawnedBulled.GetComponent<Movement> ().direction = direction;
 				//            Mathf.Atan2(direction.y, direction.x);
 				spawnedBulled.transform.rotation = Quaternion.Euler(0.0f, 0.0f, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90.0f);
 				//TODO: "attack"
 				//player.GetComponent<Hea>().playerHealth-= enemyDamage;
 				attackThreshold += attackThreshold_maxValue;
 			}
-            */
+            
 
 			// Attack
 			if (distance < 1.5f){
@@ -81,15 +84,38 @@ public class EnemyBehaviour_Ranged : MonoBehaviour {
 			}
 
 			// Hold distance. Is already done via colliders
-			if (distance > playerDistance){
+			if (distance < playerDistance) {
 				Vector3 direction = heading / distance;
 				direction.z = 0;
-				gameObject.transform.Translate (direction * Time.deltaTime * speed);
+				gameObject.transform.Translate (-direction * Time.deltaTime * speed);
+				HandleFlip(direction);
+			} 
+			else {
+				gameObject.transform.Translate (movementDirection * Time.deltaTime * speed, 0);
+				HandleFlip(movementDirection);
+				movementTime -= Time.deltaTime;
+				if (movementTime < 0) {
+					if (Random.Range (0, 3) > 0)
+					{
+						movementDirection = GetNewDirection();
+						animator.SetBool("IsMoving", true);
+					}
+
+					else
+					{
+						movementDirection = nullMovement2;
+						animator.SetBool("IsMoving", false);
+					}
+
+					movementTime = movementRange;
+				}
+
 			}
 			animator.SetBool("IsMoving", true);
 		} 
 		else {
 			gameObject.transform.Translate (movementDirection * Time.deltaTime * speed, 0);
+			HandleFlip(movementDirection);
 			movementTime -= Time.deltaTime;
 			if (movementTime < 0) {
 				if (Random.Range (0, 2) < 1)
@@ -106,8 +132,16 @@ public class EnemyBehaviour_Ranged : MonoBehaviour {
 
 				movementTime = movementRange;
 			}
-
 		}
+	}
+
+	private void HandleFlip(Vector2 movement)
+	{
+		if (movement.x < 0.0f)
+			spriteRenderer.flipX = false;
+
+		else if (movement.x > 0.0f)
+			spriteRenderer.flipX = true;
 	}
 
 	Vector2 GetNewDirection(){
