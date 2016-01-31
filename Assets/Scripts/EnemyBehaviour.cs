@@ -39,7 +39,7 @@ public class EnemyBehaviour : MonoBehaviour {
 		movementDirection = GetNewDirection ();
 
 		attackThreshold = attackThreshold_maxValue;
-
+		animator = GetComponent<Animator> ();
 
         spriteRenderer = GetComponent<SpriteRenderer>();
 
