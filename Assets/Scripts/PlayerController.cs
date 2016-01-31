@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour {
 		// Shooting via left mouseclick
 		if (Input.GetMouseButtonUp (0)) {
 			GameObject spawnedBulled = (GameObject)GameObject.Instantiate (bulletPrefab, gameObject.transform.position, Quaternion.identity);
-			spawnedBulled.GetComponent<Movement> ().direction = direction; 
+			spawnedBulled.GetComponent<Movement> ().direction = direction;
 		}
 			
 
