@@ -44,7 +44,7 @@ public class DoWorld
         {
             for (int j = 0; j < WorldHeight; j++)
             {
-                worldTiles[i, j] = new DoTile(i, j, DoTile.TileType.Empty);
+                worldTiles[i, j] = new DoTile(i, j);
             }
         }
     }
@@ -55,7 +55,7 @@ public class DoWorld
         worldTiles = tiles;
     }
 
-    public int CountNeighbours(int x, int y, DoTile.TileType type)
+    public int CountNeighbours(int x, int y, Predicate<DoTile> tilePredicate)
     {
         int count = 0;
         for (int i = -1; i <= 1; i++)
@@ -71,7 +71,7 @@ public class DoWorld
                 else if (idX < 0 || idY < 0 || idX >= WorldWidth || idY >= WorldHeight)
                     count++;
 
-                else if (GetTileAt(idX, idY).Type == type)
+                else if (tilePredicate(GetTileAt(idX, idY)))
                     count++;
             }
         }
@@ -109,8 +109,29 @@ public class DoWorld
             info |= NeighbourInfo.Right;
         }
 
-
         return (int)info;
     }
+
+
+    public bool HasLowerNeighbour(int x, int y, DoTile.TileType type)
+    {
+        if (y - 1 < 0)
+            return false;
+
+        else
+        {
+            if (GetTileAt(x, y - 1).Type == type)
+                return true;
+            else
+                return false;
+        }
+    }
+
+
+    public int GetDistance8Neigh(int x0, int y0, int x1, int y1)
+    {
+        return Mathf.Abs(x0 - x1) + Mathf.Abs(y0 - y1);
+    }
+
 
 }

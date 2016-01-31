@@ -3,10 +3,12 @@ using System.Collections;
 using System;
 
 [RequireComponent(typeof(ParticleSystem))]
-public class PortalStoneTarget : MonoBehaviour {
+public class PortalStoneTarget : MonoBehaviour 
+{
+    public static int NUM_COLORS = 5;
 
     public float timeToFade;
-    public PortalStoneManager manager;
+    private PortalStoneManager manager;
 
     private float totalTimeToFade;
 
@@ -34,6 +36,7 @@ public class PortalStoneTarget : MonoBehaviour {
 
         totalTimeToFade = timeToFade;
 
+        manager = gameObject.transform.parent.GetComponent<PortalStoneManager>();
         Debug.Assert(manager);
     }
 
@@ -72,4 +75,6 @@ public class PortalStoneTarget : MonoBehaviour {
 
         }
     }
+
+
 }

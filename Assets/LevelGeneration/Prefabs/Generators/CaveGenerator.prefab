@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &498646
 Transform:
@@ -40,12 +40,49 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   desiredSeed: -1
-  width: 128
-  height: 128
+  width: 64
+  height: 64
   curSeed: 0
+  tilabeObstaclesPrefabs:
+  - {fileID: 180524, guid: e31909acb00e2684b89f0d93ca01b16d, type: 2}
+  - {fileID: 171704, guid: 65366027353b7a748999a3cbee190d60, type: 2}
+  - {fileID: 114796, guid: 3eff4f9b88369cd4fbdb19ffceac6eb9, type: 2}
+  - {fileID: 137178, guid: b64905fd43ae5e1458af64be48b7d947, type: 2}
+  - {fileID: 106200, guid: 77ff5cdb7c205e048b3e80c8536ff118, type: 2}
+  - {fileID: 142342, guid: aad69f35b9724a74daceaa66fd965634, type: 2}
+  - {fileID: 131100, guid: d8bc7d2ca80e958478bd746cff2c5edd, type: 2}
+  - {fileID: 178332, guid: 0c7693344432ddc40bf8327b779b473b, type: 2}
+  - {fileID: 188690, guid: d1dfce90acbffd44f8d2eaaed0204f9e, type: 2}
+  - {fileID: 134070, guid: aee68f24151ca43449f60fec3cb98046, type: 2}
+  - {fileID: 165348, guid: b41b4afa127cf7b4198c9dd7963f4e0d, type: 2}
+  - {fileID: 117158, guid: b9cba06cf75d0184a9be986985d4e772, type: 2}
+  - {fileID: 142650, guid: 2abf08c8c8acc554aadeb8166ac607a4, type: 2}
+  - {fileID: 173352, guid: 54d64f2fbb551ec47ae08fb0c9cdd5cf, type: 2}
+  - {fileID: 106206, guid: fcab7a96d383dc143bf31dde6c521cf6, type: 2}
+  - {fileID: 107452, guid: 2ca6848bb4b97614382c6c77a8f95f22, type: 2}
+  groundTilesPrefabs:
+  - {fileID: 178902, guid: 9a0827e958cd5f54ea2564ac2cff5193, type: 2}
+  - {fileID: 114274, guid: a20eabfbc4bb6a146bda445628a1bfa1, type: 2}
+  - {fileID: 160508, guid: 042ccd7901b3bf143a1b996bcd25a7c4, type: 2}
+  - {fileID: 140060, guid: 2bae94fb3d6fe1440ab34fb59dfbded0, type: 2}
+  grasDecoPrefabs:
+  - {fileID: 159570, guid: e08aee69973e0ad4da4a6a9ceed4809b, type: 2}
+  - {fileID: 133882, guid: 8f2701b4f046c7a48887d028d1044a7d, type: 2}
+  swampPoolPrefabs: {fileID: 178722, guid: 04d3660dda3ff8143b0e49ea3e327495, type: 2}
+  singleTileBlockersPrefabs:
+  - {fileID: 180524, guid: e31909acb00e2684b89f0d93ca01b16d, type: 2}
+  pentagramPrefab: {fileID: 128566, guid: f9a7c0eb7ca620544abe6fbdabcf9c61, type: 2}
+  smallPortal: {fileID: 150086, guid: db4f3a6280cc3e1488d05d2b68a66d42, type: 2}
   obstacleChance: 0.4
   birthLimit: 4
   deathLimit: 3
+  grassOnGroundChance: 0.075
+  grassOnObstacleChance: 0.02
+  poolSpawnChance: 0.01
+  borderWidth: 2
+  singleObstacleChanceOnGround: 0.025
+  singleObstaclesChanceOnObstacles: 0.075
+  numSteps: 5
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
