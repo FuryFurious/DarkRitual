@@ -15,6 +15,7 @@ GameObject:
   - 114: {fileID: 11439532}
   - 114: {fileID: 11444608}
   - 114: {fileID: 11473502}
+  - 95: {fileID: 9593318}
   m_Layer: 13
   m_Name: Player
   m_TagString: Player
@@ -29,7 +30,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 164796}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 43.596134, y: 21.646418, z: 0}
+  m_LocalPosition: {x: 44.08861, y: 10.291419, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -65,6 +66,23 @@ BoxCollider2D:
   m_Offset: {x: 0.00000011920929, y: 0}
   serializedVersion: 2
   m_Size: {x: 1.0285683, y: 1.05}
+--- !u!95 &9593318
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 164796}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3f2dddd23727fa442b491640562496ab, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11439532
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -116,6 +134,7 @@ MonoBehaviour:
   playerHealth: 100
   speed: 2.34
   bulletPrefab: {fileID: 150040, guid: d53dede60b43d4d4bb1d849344b5fc99, type: 2}
+  enemyList: []
   mousePosition: {x: 0, y: 0, z: 0}
 --- !u!212 &21236088
 SpriteRenderer:
@@ -143,7 +162,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2014023331
   m_SortingOrder: 4
-  m_Sprite: {fileID: 21300000, guid: 2c9007a632d0b7e40a7f1d7201ff6588, type: 3}
+  m_Sprite: {fileID: 21300178, guid: a81857553d6bfa444a972444a4e3a5c8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

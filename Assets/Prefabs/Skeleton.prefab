@@ -8,7 +8,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 459038}
-  - 58: {fileID: 5842250}
+  - 61: {fileID: 6116828}
   - 114: {fileID: 11441980}
   m_Layer: 10
   m_Name: DamageDealing
@@ -43,12 +43,12 @@ GameObject:
   m_Component:
   - 4: {fileID: 410078}
   - 212: {fileID: 21220700}
-  - 58: {fileID: 5806594}
   - 50: {fileID: 5091164}
   - 114: {fileID: 11466190}
   - 114: {fileID: 11419312}
   - 114: {fileID: 11463356}
   - 95: {fileID: 9533766}
+  - 61: {fileID: 6196034}
   m_Layer: 12
   m_Name: Skeleton
   m_TagString: Enemy
@@ -63,7 +63,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 179902}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 41.36635, y: 9.881587, z: 0}
+  m_LocalPosition: {x: 42.651493, y: 9.962522, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 455420}
@@ -110,21 +110,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!58 &5806594
-CircleCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 179902}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.3
+  m_Constraints: 4
 --- !u!58 &5829148
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -139,8 +125,8 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 2.0351105
---- !u!58 &5842250
-CircleCollider2D:
+--- !u!61 &6116828
+BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -150,9 +136,23 @@ CircleCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.012653351, y: -0.25302505}
   serializedVersion: 2
-  m_Radius: 0.32823563
+  m_Size: {x: 0.5597359, y: 0.49395168}
+--- !u!61 &6196034
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 179902}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: -0.012653351, y: -0.2606163}
+  serializedVersion: 2
+  m_Size: {x: 0.54962033, y: 0.47876918}
 --- !u!95 &9533766
 Animator:
   serializedVersion: 3

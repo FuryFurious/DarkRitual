@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
+[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(Animator))]
 public class PlayerController : MonoBehaviour {
 
 	public int playerHealth = 100;
@@ -11,18 +13,18 @@ public class PlayerController : MonoBehaviour {
 
 	public List<GameObject> enemyList = new List<GameObject> ();
 
+    private Animator spriteAnimator;
+
 
 	public Vector3 mousePosition = new Vector3(0,0,0);
 
 	// Use this for initialization
 	void Start () {
 		sprite = gameObject.GetComponent<SpriteRenderer> ();
+
+        spriteAnimator = gameObject.GetComponent<Animator>();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-
-	}
 
 
 	void FixedUpdate () {
@@ -38,7 +40,8 @@ public class PlayerController : MonoBehaviour {
 		//Debug.Log (mousePosition);
 
 		// Shooting via left mouseclick
-		if (Input.GetMouseButtonUp (0)) {
+		if (Input.GetMouseButtonUp (0)) 
+        {
 			GameObject spawnedBulled = (GameObject)GameObject.Instantiate (bulletPrefab, gameObject.transform.position, Quaternion.identity);
 			spawnedBulled.GetComponent<Movement> ().direction = direction; 
 
@@ -48,14 +51,27 @@ public class PlayerController : MonoBehaviour {
 			
 
 		// Move via key input
-		gameObject.transform.Translate (axisH * speed * Time.deltaTime, axisV * speed * Time.deltaTime, 0);
-		// Flip vertically considering movement direction
-		if(axisH < 0 && sprite.flipX == false)
-			sprite.flipX = true;
-		if (axisH > 0 && sprite.flipX)
-			sprite.flipX = false;
+        Vector2 movementVector = new Vector2(axisH * speed * Time.deltaTime, axisV * speed * Time.deltaTime);
+        gameObject.transform.Translate(movementVector.x, movementVector.y, 0);
 
 
+        if (Mathf.Abs(axisH) > 0.25f || Mathf.Abs(axisV) > 0.25f)
+        {
+            spriteAnimator.SetBool("IsMoving", true);
+        }
+
+        else
+        {
+            spriteAnimator.SetBool("IsMoving", false);
+        }
+
+
+        // Flip vertically considering movement direction
+        if (heading.x > 0.0f)
+            sprite.flipX = true;
+
+        else if (heading.x < 0.0f)
+            sprite.flipX = false;
 
 	}
 }
