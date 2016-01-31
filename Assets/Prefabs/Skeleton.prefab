@@ -1,5 +1,22 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &108926
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 459038}
+  - 58: {fileID: 5842250}
+  - 114: {fileID: 11441980}
+  m_Layer: 10
+  m_Name: DamageDealing
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &156450
 GameObject:
   m_ObjectHideFlags: 0
@@ -31,10 +48,10 @@ GameObject:
   - 114: {fileID: 11466190}
   - 114: {fileID: 11419312}
   - 114: {fileID: 11463356}
-  - 114: {fileID: 11475998}
+  - 95: {fileID: 9533766}
   m_Layer: 12
-  m_Name: Enemy
-  m_TagString: Untagged
+  m_Name: Skeleton
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,10 +63,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 179902}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 46.96231, y: 24.313953, z: 0}
+  m_LocalPosition: {x: 41.36635, y: 9.881587, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 455420}
+  - {fileID: 459038}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &455420
@@ -64,6 +82,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 410078}
   m_RootOrder: 0
+--- !u!4 &459038
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 108926}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 410078}
+  m_RootOrder: 1
 --- !u!50 &5091164
 Rigidbody2D:
   serializedVersion: 2
@@ -108,7 +138,38 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.29293442
+  m_Radius: 2.0351105
+--- !u!58 &5842250
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 108926}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.32823563
+--- !u!95 &9533766
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 179902}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 562060d19f2130e4b910f48ae2773e4d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11419312
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -120,6 +181,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a38865b381f7f684c8b26a75f4e60d37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11441980
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 108926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41df2a1c35658c449b85b26f8fbce57d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
+  targetTag: Player
+  removeOnCollision: 0
 --- !u!114 &11455976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -160,20 +235,7 @@ MonoBehaviour:
   player: {fileID: 0}
   enemyHealth: 10
   attackThreshold_maxValue: 4
---- !u!114 &11475998
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 179902}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41df2a1c35658c449b85b26f8fbce57d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 1
-  targetTag: Player
-  removeOnCollision: 0
+  speed: 0.5
 --- !u!212 &21220700
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -200,7 +262,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2014023331
   m_SortingOrder: 20
-  m_Sprite: {fileID: 21300000, guid: 13617fca4c1b3a84599f64dc7bf11676, type: 3}
+  m_Sprite: {fileID: 21300174, guid: a81857553d6bfa444a972444a4e3a5c8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
