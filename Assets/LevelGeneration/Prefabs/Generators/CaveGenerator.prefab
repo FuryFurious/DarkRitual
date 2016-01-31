@@ -40,8 +40,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   desiredSeed: -1
-  width: 32
-  height: 128
+  width: 64
+  height: 64
   curSeed: 0
   tilabeObstaclesPrefabs:
   - {fileID: 180524, guid: e31909acb00e2684b89f0d93ca01b16d, type: 2}
@@ -72,13 +72,17 @@ MonoBehaviour:
   singleTileBlockersPrefabs:
   - {fileID: 180524, guid: e31909acb00e2684b89f0d93ca01b16d, type: 2}
   pentagramPrefab: {fileID: 128566, guid: f9a7c0eb7ca620544abe6fbdabcf9c61, type: 2}
+  smallPortal: {fileID: 150086, guid: db4f3a6280cc3e1488d05d2b68a66d42, type: 2}
   obstacleChance: 0.4
   birthLimit: 4
   deathLimit: 3
-  grasSpawnChance: 0.05
+  grassOnGroundChance: 0.075
+  grassOnObstacleChance: 0.02
   poolSpawnChance: 0.01
   borderWidth: 2
-  singleObstacleChance: 0.02
+  singleObstacleChanceOnGround: 0.025
+  singleObstaclesChanceOnObstacles: 0.075
+  numSteps: 5
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

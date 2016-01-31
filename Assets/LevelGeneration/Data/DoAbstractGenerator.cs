@@ -22,16 +22,10 @@ public abstract class DoAbstractWorldGenerator
     public GameObject swampPoolPrefabs;
     public GameObject[] singleTileBlockersPrefabs;
     public GameObject pentagramPrefab;
+    public GameObject smallPortal;
 
     protected List<GameObject>[,] spawnedGameObjects;
 
-
-
-
-
-    public DoAbstractWorldGenerator()
-    {
-    }
 
     public void Start()
     {
@@ -87,8 +81,7 @@ public abstract class DoAbstractWorldGenerator
             CurWorld.GetTileAt(i, height - 1).Type = DoTile.TileType.Obstacle;
 
         for (int i = 0; i < height; i++)
-            CurWorld.GetTileAt(i, 0).Type = DoTile.TileType.Obstacle;
-        
+            CurWorld.GetTileAt(i, 0).Type = DoTile.TileType.Obstacle;   
     }
 
     public void Init()
@@ -103,7 +96,7 @@ public abstract class DoAbstractWorldGenerator
         MyInit();
     }
 
-    protected GameObject InstantiateObject(GameObject obj, int i, int j)
+    protected GameObject MyInstantiateObject(GameObject obj, int i, int j)
     {
         GameObject spawnedObj = (GameObject)GameObject.Instantiate(obj);
 
@@ -116,7 +109,7 @@ public abstract class DoAbstractWorldGenerator
     }
 
 
-    protected void DeleteChildren()
+    protected void DeleteSpawnedGameObjects()
     {
         for (int i = 0; i < width; i++)
         {
@@ -133,13 +126,93 @@ public abstract class DoAbstractWorldGenerator
         }        
     }
 
-    public abstract void CreateGameObjects();
-
     protected abstract void MyInit();
 
-    public abstract void DoStep();
+    public abstract void DoSteps();
 
-    public abstract void DoSteps(int numSteps);
 
-    public abstract Vec2i GetPentagramPos();
+    public void InterpretLevel()
+    {
+        DeleteSpawnedGameObjects();
+
+        Debug.Assert(CurWorld != null);
+
+        for (int i = 0; i < CurWorld.WorldWidth; i++)
+        {
+            for (int j = 0; j < CurWorld.WorldHeight; j++)
+            {
+                Debug.Assert(CurWorld.GetTileAt(i, j) != null);
+
+                DoTile curTile = CurWorld.GetTileAt(i, j);
+
+                //create ground:
+                MyInstantiateObject(groundTilesPrefabs[random.Next(0, groundTilesPrefabs.Length)], i, j);
+
+                //create solid walls:
+                if (curTile.Type == DoTile.TileType.Obstacle)
+                {
+                    int id = CurWorld.GetNeighbourInfo(i, j);
+                    MyInstantiateObject(tilabeObstaclesPrefabs[id], i, j);
+                }
+
+
+                if (curTile.TopObject == DoTile.ObjectOnTop.Grass)
+                {
+                   GameObject obj = MyInstantiateObject(grasDecoPrefabs[random.Next(grasDecoPrefabs.Length)], i, j);
+
+                   if (RandFloat() < 0.5f)
+                       FlipX(obj);
+                }
+
+                else if (curTile.TopObject == DoTile.ObjectOnTop.SingleBlocker)
+                {
+                    GameObject obj = MyInstantiateObject(singleTileBlockersPrefabs[random.Next(singleTileBlockersPrefabs.Length)], i, j);
+
+                    if (RandFloat() < 0.5f)
+                        FlipX(obj);
+                   
+                }
+
+                else if (curTile.TopObject == DoTile.ObjectOnTop.BigPortal)
+                {
+                    MyInstantiateObject(pentagramPrefab, i, j);
+                }
+
+                else if (curTile.TopObject == DoTile.ObjectOnTop.Pool)
+                {
+                    GameObject obj = MyInstantiateObject(swampPoolPrefabs, i, j);
+
+                    if (RandFloat() < 0.5f)
+                        FlipX(obj);
+                }
+
+                else if (curTile.TopObject == DoTile.ObjectOnTop.SmallPortal)
+                {
+                    //TODO:
+                    MyInstantiateObject(smallPortal, i, j);
+                }
+
+ 
+            }
+        }
+
+
+
+    }
+
+    void FlipX(GameObject obj)
+    {
+        SpriteRenderer spriteRenderer = obj.GetComponent<SpriteRenderer>();
+
+        if (spriteRenderer != null)
+            spriteRenderer.flipX = true;
+
+        else
+        {
+            obj.transform.localScale = new Vector3(-obj.transform.localScale.x, obj.transform.localScale.y, obj.transform.localScale.z);
+        }
+    }
+
+
+
 }

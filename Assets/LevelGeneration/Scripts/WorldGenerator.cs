@@ -16,7 +16,7 @@ public class WorldGenerator : MonoBehaviour
             if (worldGenerator != null)
             {
                 worldGenerator.Init();
-                worldGenerator.CreateGameObjects();
+                worldGenerator.InterpretLevel();
             }
         
         }
@@ -25,10 +25,12 @@ public class WorldGenerator : MonoBehaviour
         {
             if (worldGenerator != null)
             {
-                worldGenerator.DoStep();
-                worldGenerator.CreateGameObjects();
+                worldGenerator.DoSteps();
+                worldGenerator.InterpretLevel();
             }
         }
+
+
 
 
 	}

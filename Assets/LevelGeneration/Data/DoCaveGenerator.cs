@@ -11,39 +11,196 @@ public class DoCaveGenerator
     public int birthLimit;
     [Range(0, 9)]
     public int deathLimit;
+
+
     [Range(0.0f, 1.0f)]
-    public float grasSpawnChance;
+    public float grassOnGroundChance;
+     [Range(0.0f, 1.0f)]
+    public float grassOnObstacleChance;
+
     [Range(0.0f, 1.0f)]
     public float poolSpawnChance;
     [Range(0, 100)]
     public int borderWidth;
+
     [Range(0.0f, 1.0f)]
-    public float singleObstacleChance;
+    public float singleObstacleChanceOnGround;
+    [Range(0.0f, 1.0f)]
+    public float singleObstaclesChanceOnObstacles;
 
-    private Vec2i pentagramPos = new Vec2i(-1, -1);
-
-    private List<DoTile> singleFieldObstacles = new List<DoTile>();
+    [Range(1, 50)]
+    public int numSteps;
 
 
     protected override void MyInit()
     {
         CreateNoise(obstacleChance);
+
+        DoSteps();
     }
 
 
-    public override void DoStep()
+    public override void DoSteps()
+    {
+        DoWorld oldWorld = null;
+
+        for (int i = 0; i < numSteps - 1; i++)
+        {
+            CarveTheCave();
+
+            oldWorld = CurWorld;
+            CurWorld = NextWorld;
+            NextWorld = oldWorld;
+        }
+
+        CarveTheCave();
+
+        List<DoRegion> regions = CalculateRegions();
+
+        Debug.Assert(regions.Count >= 1);
+
+        for (int i = 1; i < regions.Count; i++)
+        {
+            List<DoTile> tiles = regions[i].GetTiles();
+
+            for (int j = 0; j < tiles.Count; j++)
+                tiles[j].Type = DoTile.TileType.Obstacle;
+        }
+
+        oldWorld = CurWorld;
+        CurWorld = NextWorld;
+        NextWorld = oldWorld;
+
+        DoRegion biggestRegion = regions[0];
+
+        PlaceAllTheStuff(biggestRegion);
+        
+      
+    }
+
+    private void PlaceAllTheStuff(DoRegion biggestRegion)
+    {
+
+        for (int i = 0; i < width; i++)
+        {
+            for (int j = 0; j < height; j++)
+            {
+
+                DoTile curTile = CurWorld.GetTileAt(i, j);
+
+                //you are in the ground:
+                if (curTile.Type == DoTile.TileType.Empty)
+                {
+                    //create grass
+                    if (RandFloat() < grassOnGroundChance)
+                        curTile.TopObject = DoTile.ObjectOnTop.Grass;
+
+                    //create obstacle
+                    else if (CurWorld.CountNeighbours(i, j, (x => x.Type == DoTile.TileType.Obstacle)) == 0)
+                    {
+                        if (RandFloat() < singleObstacleChanceOnGround)
+                            curTile.TopObject = DoTile.ObjectOnTop.SingleBlocker;
+                    }
+
+                    //create pool:
+                    else if (RandFloat() < poolSpawnChance)
+                        curTile.TopObject = DoTile.ObjectOnTop.Pool;
+                }
+
+
+                //you are on a obstacle:
+                else if (curTile.Type == DoTile.TileType.Obstacle)
+                {
+
+                    //create grass:
+                    if (CurWorld.HasLowerNeighbour(i, j, DoTile.TileType.Obstacle))
+                    {
+                        if (RandFloat() < grassOnObstacleChance)
+                            curTile.TopObject = DoTile.ObjectOnTop.Grass;
+                    }
+
+                    //create obstacle:
+                    else if (CurWorld.HasLowerNeighbour(i, j, DoTile.TileType.Obstacle))
+                    {
+                        if (RandFloat() < singleObstaclesChanceOnObstacles)
+                            curTile.TopObject = DoTile.ObjectOnTop.SingleBlocker;
+                    }
+
+                }
+
+            }
+        }
+
+
+       
+        DoTile bigPortalTile = biggestRegion.GetTile( random.Next(biggestRegion.RegionSize()));
+        RemoveTilesAround(CurWorld, biggestRegion, bigPortalTile.X, bigPortalTile.Y, 4);
+        bigPortalTile.TopObject = DoTile.ObjectOnTop.BigPortal;
+
+
+
+        for (int i = 0; i < PortalStoneTarget.NUM_COLORS; i++)
+        {
+            DoTile smallPortalTile = biggestRegion.GetTile(random.Next(biggestRegion.RegionSize()));
+            RemoveTilesAround(CurWorld, biggestRegion, smallPortalTile.X, smallPortalTile.Y, 2);
+            smallPortalTile.TopObject = DoTile.ObjectOnTop.SmallPortal;
+        }
+   
+
+
+
+    }
+
+ 
+
+   
+
+
+
+
+    private List<DoRegion> CalculateRegions()
+    {
+        List<DoRegion> regions = new List<DoRegion>();
+        int regionCount = 0;
+  
+        int[,] markedTiles = new int[width, height];
+
+
+        for (int i = 0; i < width; i++)
+        {
+            for (int j = 0; j < height; j++)
+            {
+                if (markedTiles[i, j] != 0 || NextWorld.GetTileAt(i, j).Type == DoTile.TileType.Obstacle)
+                    continue;
+
+                else
+                {
+                    regionCount++;
+                    regions.Add(new DoRegion(regionCount));
+
+                    FillRegion(regions[regionCount - 1], NextWorld, markedTiles, i, j);
+                }
+            }
+        }
+
+        regions.Sort();
+
+        return regions;
+    }
+
+    private void CarveTheCave()
     {
         for (int i = 0; i < CurWorld.WorldWidth; i++)
         {
             for (int j = 0; j < CurWorld.WorldHeight; j++)
             {
-                int blockCount = CurWorld.CountNeighbours(i, j, DoTile.TileType.Obstacle);
+                int blockCount = CurWorld.CountNeighbours(i, j, (x => x.Type == DoTile.TileType.Obstacle));
 
                 if (CurWorld.GetTileAt(i, j).Type == DoTile.TileType.Empty)
                 {
                     if (blockCount > birthLimit)
                         NextWorld.GetTileAt(i, j).Type = DoTile.TileType.Obstacle;
-                   
+
                     else
                         NextWorld.GetTileAt(i, j).Type = DoTile.TileType.Empty;
                 }
@@ -53,7 +210,7 @@ public class DoCaveGenerator
                     if (blockCount < deathLimit)
                         NextWorld.GetTileAt(i, j).Type = DoTile.TileType.Empty;
 
-                    else 
+                    else
                         NextWorld.GetTileAt(i, j).Type = DoTile.TileType.Obstacle;
                 }
 
@@ -61,137 +218,66 @@ public class DoCaveGenerator
                     NextWorld.GetTileAt(i, j).Type = DoTile.TileType.Obstacle;
             }
         }
-
-        DoWorld oldWorld = CurWorld;
-        CurWorld = NextWorld;
-        NextWorld = oldWorld;
     }
 
-
-
-
-    public override void DoSteps(int numSteps)
+    private void FillRegion(DoRegion region, DoWorld world, int[,] markedTiles, int x, int y)
     {
-        for (int i = 0; i < numSteps; i++)
-            DoStep();
-    }
 
-
-    public override void CreateGameObjects()
-    {
-        singleFieldObstacles.Clear();
-        DeleteChildren();
-
-        Debug.Assert(CurWorld != null);
-
-        for (int i = 0; i < CurWorld.WorldWidth; i++)
+        //is inside the level:
+        if (x >= 0 && y >= 0 && y < height && x < width)
         {
-            for (int j = 0; j < CurWorld.WorldHeight; j++)
+            //label is not 0 -> its marked by a region
+            if (markedTiles[x, y] != 0 || world.GetTileAt(x, y).Type == DoTile.TileType.Obstacle)
+                return;
+
+            else
             {
-                Debug.Assert(CurWorld.GetTileAt(i, j) != null);
+                markedTiles[x, y] = region.RegionId;
+                region.AddTile(world.GetTileAt(x, y));
 
-                //create ground:
-                InstantiateObject(groundTilesPrefabs[random.Next(0, groundTilesPrefabs.Length)], i, j);
-
-                //create solid walls:
-                if (CurWorld.GetTileAt(i, j).Type == DoTile.TileType.Obstacle)
-                {
-                    int id = CurWorld.GetNeighbourInfo(i, j);
-                    InstantiateObject(tilabeObstaclesPrefabs[id], i, j);
-                }
-
-
-                //create decorations or single field blockers:
-                else
-                {
-                    //create gras:
-                    if (RandFloat() < grasSpawnChance)
-                    {
-                        GameObject gras = InstantiateObject(grasDecoPrefabs[random.Next(0, grasDecoPrefabs.Length)], i, j);
-
-                        if (RandFloat() < 0.5f)
-                            FlipX(gras);
-                    }
-
-                    //create pools
-                    else if (RandFloat() < poolSpawnChance)
-                    {
-                        GameObject pool = InstantiateObject(swampPoolPrefabs, i, j);
-
-                        if (RandFloat() < 0.5f)
-                            FlipX(pool);
-                    }
-
-                    //create stones:
-                    else if(RandFloat() < singleObstacleChance && CurWorld.CountNeighbours(i, j, DoTile.TileType.Empty) == 8)
-                    {
-
-                        InstantiateObject(singleTileBlockersPrefabs[random.Next(0, singleTileBlockersPrefabs.Length)], i, j);
-
-                        CurWorld.GetTileAt(i, j).Type = DoTile.TileType.Obstacle;
-
-                        singleFieldObstacles.Add(CurWorld.GetTileAt(i, j));
-                    }
-                }
+                FillRegion(region, world, markedTiles, x - 1, y);
+                FillRegion(region, world, markedTiles, x + 1, y);
+                FillRegion(region, world, markedTiles, x, y - 1);
+                FillRegion(region, world, markedTiles, x, y + 1);
             }
+
+
+          
         }
-
-
-        Debug.Assert(singleFieldObstacles.Count >= 1);
-        
-      DoTile pentagramTile = singleFieldObstacles[random.Next(0, singleFieldObstacles.Count)];
-      CreatePentagram(pentagramTile.X, pentagramTile.Y);
     }
 
-    void CreatePentagram(int i, int j)
-    {
-        RemoveTilesAround(i, j, 2);
-        InstantiateObject(pentagramPrefab, i, j);
-        pentagramPos = new Vec2i(i, j);
-    }
 
-    void FlipX(GameObject obj)
-    {
-        SpriteRenderer spriteRenderer = obj.GetComponent<SpriteRenderer>();
 
-        if(spriteRenderer != null)
-            spriteRenderer.flipX = true;
-    }
-
-    public override Vec2i GetPentagramPos()
-    {
-        return pentagramPos;
-    }
-
-    public void RemoveTilesAround(int x, int y, int radius)
+    public void RemoveTilesAround(DoWorld world, DoRegion biggestRegion, int x, int y, int radius)
     {
         int half = radius / 2;
+        int secHalf = radius - half;
 
-        for (int i = -half; i <= half; i++)
+        for (int i = -radius; i <= radius; i++)
         {
-            for (int j = -half; j <= half; j++)
+            for (int j = -radius; j <= radius; j++)
             {
                 int idX = x + i;
                 int idY = y + j;
 
-                if (idX >= 0 && idY >= 0 && idX < CurWorld.WorldWidth && idY < CurWorld.WorldHeight)
+                if (idX >= borderWidth && idY >= borderWidth && idX < world.WorldWidth - borderWidth && idY < world.WorldHeight - borderWidth)
                 {
 
-                    if (CurWorld.GetTileAt(idX, idY).Type == DoTile.TileType.Empty)
+                    int dist = world.GetDistance8Neigh(x, y, idX, idY);
+                    if (dist <= radius)
                     {
-                        for (int k = spawnedGameObjects[idX, idY].Count - 1; k >= 0; k--)
-                        {
-                            GameObject.Destroy(spawnedGameObjects[idX, idY][k]);
-                        }
-                        spawnedGameObjects[idX, idY].Clear();
+                        world.GetTileAt(idX, idY).Type = DoTile.TileType.Empty;
+                        world.GetTileAt(idX, idY).TopObject = DoTile.ObjectOnTop.None;
 
-
-                        //recreate the ground tiles:
-                        InstantiateObject(groundTilesPrefabs[random.Next(0, groundTilesPrefabs.Length)], idX, idY);
+                        if(biggestRegion != null)
+                            biggestRegion.Remove(world.GetTileAt(idX, idY));
                     }
                 }
             }
         }
-
     }
+
+
+    
+
 }

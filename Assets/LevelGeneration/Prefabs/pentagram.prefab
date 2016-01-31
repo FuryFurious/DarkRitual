@@ -29,6 +29,7 @@ GameObject:
   - 4: {fileID: 495676}
   - 212: {fileID: 21293258}
   - 95: {fileID: 9528760}
+  - 114: {fileID: 11455532}
   m_Layer: 0
   m_Name: BigPortal
   m_TagString: Untagged
@@ -348,7 +349,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToFade: 0
-  manager: {fileID: 0}
   targetColor: 0
 --- !u!114 &11404576
 MonoBehaviour:
@@ -374,7 +374,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToFade: 0
-  manager: {fileID: 0}
   targetColor: 0
 --- !u!114 &11435110
 MonoBehaviour:
@@ -388,7 +387,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToFade: 0
-  manager: {fileID: 0}
   targetColor: 0
 --- !u!114 &11447132
 MonoBehaviour:
@@ -402,8 +400,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToFade: 0
-  manager: {fileID: 0}
   targetColor: 0
+--- !u!114 &11455532
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a38865b381f7f684c8b26a75f4e60d37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11464220
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -430,7 +438,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToFade: 0
-  manager: {fileID: 0}
   targetColor: 0
 --- !u!198 &19807318
 ParticleSystem:
@@ -8216,7 +8223,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
+  m_SortingLayerID: -2014023331
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300046, guid: a81857553d6bfa444a972444a4e3a5c8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -8228,7 +8235,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_SortingLayerID
+      value: -2014023331
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 128566}
