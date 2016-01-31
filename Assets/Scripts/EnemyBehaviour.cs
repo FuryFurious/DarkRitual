@@ -44,6 +44,13 @@ public class EnemyBehaviour : MonoBehaviour {
 
 		// Run towards Player if in sight. Does only work with 1 Player right now
 		if (playerInSight) {
+
+            if (player == null)
+            {
+                playerInSight = false;
+                return;
+            }
+
 			var heading = player.transform.position - gameObject.transform.position;
 			var distance = heading.magnitude;
 

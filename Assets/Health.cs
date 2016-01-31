@@ -24,11 +24,6 @@ public class Health : MonoBehaviour
     {
         health -= dmg;
 
-        if (gameObject.tag == "Player")
-        {
-            Debug.Log("player dmg");
-        }
-
         OnDamageReceived();
     }
 
