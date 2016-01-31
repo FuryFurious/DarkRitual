@@ -8,6 +8,8 @@ public class EnemyBehaviour : MonoBehaviour {
     [HideInInspector]
 	public GameObject player;
 
+    public Animator animator;
+
 	public int enemyHealth = 50;
 
 	// Movement variables
@@ -70,16 +72,27 @@ public class EnemyBehaviour : MonoBehaviour {
 				Vector3 direction = heading / distance;
 				direction.z = 0;
 				gameObject.transform.Translate (direction * Time.deltaTime * speed);
+           
 			}
+
+            animator.SetBool("IsMoving", true);
 		} 
 		else {
 			gameObject.transform.Translate (movementDirection * Time.deltaTime * speed, 0);
 			movementTime -= Time.deltaTime;
 			if (movementTime < 0) {
 				if (Random.Range (0, 2) < 1)
-					movementDirection = GetNewDirection ();
-				else
-					movementDirection = nullMovement2;
+                {
+                    movementDirection = GetNewDirection();
+                    animator.SetBool("IsMoving", true);
+                }
+					
+                else
+                {
+                    movementDirection = nullMovement2;
+                    animator.SetBool("IsMoving", false);
+                }
+			
 				movementTime = movementRange;
 			}
 
