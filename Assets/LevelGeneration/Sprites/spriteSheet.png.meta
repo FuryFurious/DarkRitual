@@ -1,16 +1,16 @@
 fileFormatVersion: 2
 guid: a81857553d6bfa444a972444a4e3a5c8
-timeCreated: 1454187568
+timeCreated: 1454242465
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: pentagramBase
-    21300002: spriteSheet_1
+    21300002: greenPortal1
     21300004: stoneWall1000
     21300006: stoneWall1010
     21300008: stoneWall0010
-    21300010: spriteSheet_5
-    21300012: spriteSheet_6
+    21300010: whitePortal1
+    21300012: whitePortal2
     21300014: pool0
     21300016: stone00
     21300018: stoneWall1100
@@ -27,13 +27,13 @@ TextureImporter:
     21300040: stoneWall1011
     21300042: stoneWall0011
     21300044: stoneWall0001
-    21300046: portal0
+    21300046: pinkPortal0
     21300048: spriteSheet_24
-    21300050: portal1
+    21300050: pinkPortal1
     21300052: spriteSheet_26
-    21300054: portal2
+    21300054: pinkPortal2
     21300056: spriteSheet_28
-    21300058: portal3
+    21300058: pinkPortal3
     21300060: spriteSheet_30
     21300062: spriteSheet_31
     21300064: spriteSheet_32
@@ -66,6 +66,27 @@ TextureImporter:
     21300118: pool2
     21300120: pool3
     21300122: pentaGramBlur
+    21300124: greenPortal0
+    21300126: greenPortal2
+    21300128: greenPortal3
+    21300130: bluePortal0
+    21300132: bluePortal1
+    21300134: bluePortal2
+    21300136: bluePortal3
+    21300138: yellowPortal0
+    21300140: yellowPortal1
+    21300142: yellowPortal2
+    21300144: yellowPortal3
+    21300146: redPortal0
+    21300148: redPortal1
+    21300150: redPortal2
+    21300152: redPortal3
+    21300154: whitePortal0
+    21300156: whitePortal3
+    21300158: fireViolet0
+    21300160: fireViolet1
+    21300162: fireRed0
+    21300164: fireRed1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -388,105 +409,107 @@ TextureImporter:
         - {x: -15, y: -16}
         - {x: 16, y: -16}
         - {x: 16, y: 16}
-    - name: portal0
+    - name: pinkPortal0
       rect:
         serializedVersion: 2
         x: 0
-        y: 320
+        y: 128
         width: 64
         height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: 17, y: -21}
-        - {x: 20, y: -13}
-        - {x: 20, y: 24}
-        - {x: 15, y: 26}
-        - {x: -16, y: 26}
-        - {x: -20, y: 19}
-        - {x: -20, y: -31}
-        - {x: -18, y: -32}
-        - {x: 14, y: -32}
-        - {x: 17, y: -25}
-        - {x: 12, y: -22}
-        - {x: 9, y: -22}
-    - name: portal1
+      - - {x: 9, y: -23}
+        - {x: 11, y: -23}
+        - {x: 20, y: -17}
+        - {x: 20, y: 15}
+        - {x: 15, y: 25}
+        - {x: -20, y: 25}
+        - {x: -20, y: -32}
+        - {x: 13, y: -32}
+        - {x: 16, y: -29}
+        - {x: 16, y: -27}
+        - {x: 12, y: -23}
+    - name: pinkPortal1
       rect:
         serializedVersion: 2
         x: 64
-        y: 320
+        y: 128
         width: 64
         height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: 11, y: -22}
-        - {x: 15, y: -19}
-        - {x: 20, y: -12}
-        - {x: 20, y: 26}
-        - {x: -17, y: 26}
-        - {x: -20, y: 20}
-        - {x: -20, y: -31}
-        - {x: -18, y: -32}
-        - {x: 14, y: -32}
-        - {x: 17, y: -25}
-        - {x: 12, y: -22}
-        - {x: 9, y: -22}
-    - name: portal2
+      - - {x: 9, y: -23}
+        - {x: 11, y: -23}
+        - {x: 15, y: -20}
+        - {x: 20, y: -13}
+        - {x: 20, y: 8}
+        - {x: 17, y: 21}
+        - {x: 9, y: 25}
+        - {x: -12, y: 25}
+        - {x: -20, y: 11}
+        - {x: -20, y: -16}
+        - {x: -19, y: -25}
+        - {x: -17, y: -32}
+        - {x: 13, y: -32}
+        - {x: 16, y: -29}
+        - {x: 16, y: -27}
+        - {x: 12, y: -23}
+    - name: pinkPortal2
       rect:
         serializedVersion: 2
         x: 128
-        y: 320
+        y: 128
         width: 64
         height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: 11, y: -22}
-        - {x: 20, y: -18}
-        - {x: 20, y: 19}
-        - {x: 18, y: 30}
-        - {x: -8, y: 30}
+      - - {x: 9, y: -23}
+        - {x: 11, y: -23}
+        - {x: 20, y: -19}
+        - {x: 20, y: 18}
+        - {x: 18, y: 29}
+        - {x: -9, y: 29}
         - {x: -20, y: 19}
-        - {x: -20, y: -13}
-        - {x: -18, y: -30}
-        - {x: -14, y: -32}
-        - {x: 14, y: -32}
-        - {x: 17, y: -25}
-        - {x: 12, y: -22}
-        - {x: 9, y: -22}
-    - name: portal3
+        - {x: -20, y: -18}
+        - {x: -18, y: -32}
+        - {x: 13, y: -32}
+        - {x: 16, y: -29}
+        - {x: 16, y: -27}
+        - {x: 12, y: -23}
+    - name: pinkPortal3
       rect:
         serializedVersion: 2
         x: 192
-        y: 320
+        y: 128
         width: 64
         height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: 9, y: -22}
-        - {x: 11, y: -22}
-        - {x: 20, y: -15}
+      - - {x: 9, y: -23}
+        - {x: 11, y: -23}
+        - {x: 20, y: -16}
         - {x: 20, y: 15}
-        - {x: 12, y: 27}
-        - {x: -12, y: 27}
-        - {x: -20, y: 13}
-        - {x: -20, y: -28}
-        - {x: -18, y: -32}
-        - {x: 14, y: -32}
-        - {x: 16, y: -28}
-        - {x: 16, y: -26}
-        - {x: 12, y: -22}
-      - - {x: -6, y: 28}
-        - {x: -3, y: 29}
-        - {x: -3, y: 32}
-        - {x: -7, y: 32}
-        - {x: -8, y: 31}
+        - {x: 16, y: 26}
+        - {x: -8, y: 26}
+        - {x: -20, y: 22}
+        - {x: -20, y: -32}
+        - {x: 13, y: -32}
+        - {x: 16, y: -29}
+        - {x: 16, y: -27}
+        - {x: 12, y: -23}
+      - - {x: -6, y: 27}
+        - {x: -3, y: 28}
+        - {x: -3, y: 31}
+        - {x: -6, y: 32}
+        - {x: -8, y: 30}
     - name: spriteSheet_40
       rect:
         serializedVersion: 2
@@ -910,6 +933,633 @@ TextureImporter:
         - {x: 30, y: -26}
         - {x: 32, y: -23}
         - {x: 32, y: 24}
+    - name: greenPortal0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 9, y: -23}
+        - {x: 11, y: -23}
+        - {x: 20, y: -17}
+        - {x: 20, y: 15}
+        - {x: 15, y: 25}
+        - {x: -20, y: 25}
+        - {x: -20, y: -32}
+        - {x: 13, y: -32}
+        - {x: 16, y: -29}
+        - {x: 16, y: -27}
+        - {x: 12, y: -23}
+    - name: greenPortal1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 9, y: -23}
+        - {x: 11, y: -23}
+        - {x: 15, y: -20}
+        - {x: 20, y: -13}
+        - {x: 20, y: 8}
+        - {x: 17, y: 21}
+        - {x: 9, y: 25}
+        - {x: -12, y: 25}
+        - {x: -20, y: 11}
+        - {x: -20, y: -16}
+        - {x: -19, y: -25}
+        - {x: -17, y: -32}
+        - {x: 13, y: -32}
+        - {x: 16, y: -29}
+        - {x: 16, y: -27}
+        - {x: 12, y: -23}
+    - name: greenPortal2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 9, y: -23}
+        - {x: 11, y: -23}
+        - {x: 20, y: -19}
+        - {x: 20, y: 18}
+        - {x: 18, y: 29}
+        - {x: -9, y: 29}
+        - {x: -20, y: 19}
+        - {x: -20, y: -18}
+        - {x: -18, y: -32}
+        - {x: 13, y: -32}
+        - {x: 16, y: -29}
+        - {x: 16, y: -27}
+        - {x: 12, y: -23}
+    - name: greenPortal3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 9, y: -23}
+        - {x: 11, y: -23}
+        - {x: 20, y: -16}
+        - {x: 20, y: 15}
+        - {x: 16, y: 26}
+        - {x: -8, y: 26}
+        - {x: -20, y: 22}
+        - {x: -20, y: -32}
+        - {x: 13, y: -32}
+        - {x: 16, y: -29}
+        - {x: 16, y: -27}
+        - {x: 12, y: -23}
+      - - {x: -6, y: 27}
+        - {x: -3, y: 28}
+        - {x: -3, y: 31}
+        - {x: -6, y: 32}
+        - {x: -8, y: 30}
+    - name: bluePortal0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 9, y: -23}
+        - {x: 11, y: -23}
+        - {x: 20, y: -17}
+        - {x: 20, y: 15}
+        - {x: 15, y: 25}
+        - {x: -20, y: 25}
+        - {x: -20, y: -32}
+        - {x: 13, y: -32}
+        - {x: 16, y: -29}
+        - {x: 16, y: -27}
+        - {x: 12, y: -23}
+    - name: bluePortal1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 9, y: -23}
+        - {x: 11, y: -23}
+        - {x: 15, y: -20}
+        - {x: 20, y: -13}
+        - {x: 20, y: 8}
+        - {x: 17, y: 21}
+        - {x: 9, y: 25}
+        - {x: -12, y: 25}
+        - {x: -20, y: 11}
+        - {x: -20, y: -16}
+        - {x: -19, y: -25}
+        - {x: -17, y: -32}
+        - {x: 13, y: -32}
+        - {x: 16, y: -29}
+        - {x: 16, y: -27}
+        - {x: 12, y: -23}
+    - name: bluePortal2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 9, y: -23}
+        - {x: 11, y: -23}
+        - {x: 20, y: -19}
+        - {x: 20, y: 18}
+        - {x: 18, y: 29}
+        - {x: -9, y: 29}
+        - {x: -20, y: 19}
+        - {x: -20, y: -18}
+        - {x: -18, y: -32}
+        - {x: 13, y: -32}
+        - {x: 16, y: -29}
+        - {x: 16, y: -27}
+        - {x: 12, y: -23}
+    - name: bluePortal3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 9, y: -23}
+        - {x: 11, y: -23}
+        - {x: 20, y: -16}
+        - {x: 20, y: 15}
+        - {x: 16, y: 26}
+        - {x: -8, y: 26}
+        - {x: -20, y: 22}
+        - {x: -20, y: -32}
+        - {x: 13, y: -32}
+        - {x: 16, y: -29}
+        - {x: 16, y: -27}
+        - {x: 12, y: -23}
+      - - {x: -6, y: 27}
+        - {x: -3, y: 28}
+        - {x: -3, y: 31}
+        - {x: -6, y: 32}
+        - {x: -8, y: 30}
+    - name: yellowPortal0
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 9, y: -23}
+        - {x: 11, y: -23}
+        - {x: 20, y: -17}
+        - {x: 20, y: 15}
+        - {x: 15, y: 25}
+        - {x: -20, y: 25}
+        - {x: -20, y: -32}
+        - {x: 13, y: -32}
+        - {x: 16, y: -29}
+        - {x: 16, y: -27}
+        - {x: 12, y: -23}
+    - name: yellowPortal1
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 9, y: -23}
+        - {x: 11, y: -23}
+        - {x: 15, y: -20}
+        - {x: 20, y: -13}
+        - {x: 20, y: 8}
+        - {x: 17, y: 21}
+        - {x: 9, y: 25}
+        - {x: -12, y: 25}
+        - {x: -20, y: 11}
+        - {x: -20, y: -16}
+        - {x: -19, y: -25}
+        - {x: -17, y: -32}
+        - {x: 13, y: -32}
+        - {x: 16, y: -29}
+        - {x: 16, y: -27}
+        - {x: 12, y: -23}
+    - name: yellowPortal2
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 9, y: -23}
+        - {x: 11, y: -23}
+        - {x: 20, y: -19}
+        - {x: 20, y: 18}
+        - {x: 18, y: 29}
+        - {x: -9, y: 29}
+        - {x: -20, y: 19}
+        - {x: -20, y: -18}
+        - {x: -18, y: -32}
+        - {x: 13, y: -32}
+        - {x: 16, y: -29}
+        - {x: 16, y: -27}
+        - {x: 12, y: -23}
+    - name: yellowPortal3
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 9, y: -23}
+        - {x: 11, y: -23}
+        - {x: 20, y: -16}
+        - {x: 20, y: 15}
+        - {x: 16, y: 26}
+        - {x: -8, y: 26}
+        - {x: -20, y: 22}
+        - {x: -20, y: -32}
+        - {x: 13, y: -32}
+        - {x: 16, y: -29}
+        - {x: 16, y: -27}
+        - {x: 12, y: -23}
+      - - {x: -6, y: 27}
+        - {x: -3, y: 28}
+        - {x: -3, y: 31}
+        - {x: -6, y: 32}
+        - {x: -8, y: 30}
+    - name: redPortal0
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 9, y: -23}
+        - {x: 11, y: -23}
+        - {x: 20, y: -17}
+        - {x: 20, y: 15}
+        - {x: 15, y: 25}
+        - {x: -20, y: 25}
+        - {x: -20, y: -32}
+        - {x: 13, y: -32}
+        - {x: 16, y: -29}
+        - {x: 16, y: -27}
+        - {x: 12, y: -23}
+    - name: redPortal1
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 9, y: -23}
+        - {x: 11, y: -23}
+        - {x: 15, y: -20}
+        - {x: 20, y: -13}
+        - {x: 20, y: 8}
+        - {x: 17, y: 21}
+        - {x: 9, y: 25}
+        - {x: -12, y: 25}
+        - {x: -20, y: 11}
+        - {x: -20, y: -16}
+        - {x: -19, y: -25}
+        - {x: -17, y: -32}
+        - {x: 13, y: -32}
+        - {x: 16, y: -29}
+        - {x: 16, y: -27}
+        - {x: 12, y: -23}
+    - name: redPortal2
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 9, y: -23}
+        - {x: 11, y: -23}
+        - {x: 20, y: -19}
+        - {x: 20, y: 18}
+        - {x: 18, y: 29}
+        - {x: -9, y: 29}
+        - {x: -20, y: 19}
+        - {x: -20, y: -18}
+        - {x: -18, y: -32}
+        - {x: 13, y: -32}
+        - {x: 16, y: -29}
+        - {x: 16, y: -27}
+        - {x: 12, y: -23}
+    - name: redPortal3
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 9, y: -23}
+        - {x: 11, y: -23}
+        - {x: 20, y: -16}
+        - {x: 20, y: 15}
+        - {x: 16, y: 26}
+        - {x: -8, y: 26}
+        - {x: -20, y: 22}
+        - {x: -20, y: -32}
+        - {x: 13, y: -32}
+        - {x: 16, y: -29}
+        - {x: 16, y: -27}
+        - {x: 12, y: -23}
+      - - {x: -6, y: 27}
+        - {x: -3, y: 28}
+        - {x: -3, y: 31}
+        - {x: -6, y: 32}
+        - {x: -8, y: 30}
+    - name: whitePortal0
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 9, y: -23}
+        - {x: 11, y: -23}
+        - {x: 20, y: -17}
+        - {x: 20, y: 15}
+        - {x: 15, y: 25}
+        - {x: -20, y: 25}
+        - {x: -20, y: -32}
+        - {x: 13, y: -32}
+        - {x: 16, y: -29}
+        - {x: 16, y: -27}
+        - {x: 12, y: -23}
+    - name: whitePortal1
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 9, y: -23}
+        - {x: 11, y: -23}
+        - {x: 15, y: -20}
+        - {x: 20, y: -13}
+        - {x: 20, y: 8}
+        - {x: 17, y: 21}
+        - {x: 9, y: 25}
+        - {x: -12, y: 25}
+        - {x: -20, y: 11}
+        - {x: -20, y: -16}
+        - {x: -19, y: -25}
+        - {x: -17, y: -32}
+        - {x: 13, y: -32}
+        - {x: 16, y: -29}
+        - {x: 16, y: -27}
+        - {x: 12, y: -23}
+    - name: whitePortal2
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 9, y: -23}
+        - {x: 11, y: -23}
+        - {x: 20, y: -19}
+        - {x: 20, y: 18}
+        - {x: 18, y: 29}
+        - {x: -9, y: 29}
+        - {x: -20, y: 19}
+        - {x: -20, y: -18}
+        - {x: -18, y: -32}
+        - {x: 13, y: -32}
+        - {x: 16, y: -29}
+        - {x: 16, y: -27}
+        - {x: 12, y: -23}
+    - name: whitePortal3
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 9, y: -23}
+        - {x: 11, y: -23}
+        - {x: 20, y: -16}
+        - {x: 20, y: 15}
+        - {x: 16, y: 26}
+        - {x: -8, y: 26}
+        - {x: -20, y: 22}
+        - {x: -20, y: -32}
+        - {x: 13, y: -32}
+        - {x: 16, y: -29}
+        - {x: 16, y: -27}
+        - {x: 12, y: -23}
+      - - {x: -6, y: 27}
+        - {x: -3, y: 28}
+        - {x: -3, y: 31}
+        - {x: -6, y: 32}
+        - {x: -8, y: 30}
+    - name: fireViolet0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 320
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 4, y: 29}
+        - {x: 1, y: 29}
+        - {x: -2, y: 26}
+        - {x: -5, y: 20}
+        - {x: -4, y: 23}
+        - {x: -4, y: 25}
+        - {x: -6, y: 29}
+        - {x: -18, y: 29}
+        - {x: -18, y: -28}
+        - {x: -15, y: -30}
+        - {x: 7, y: -30}
+        - {x: 21, y: -23}
+        - {x: 21, y: 4}
+        - {x: 19, y: 6}
+      - - {x: 7, y: 24}
+        - {x: 4, y: 21}
+        - {x: 4, y: 19}
+        - {x: 7, y: 16}
+        - {x: 8, y: 16}
+        - {x: 11, y: 19}
+        - {x: 11, y: 21}
+        - {x: 8, y: 24}
+    - name: fireViolet1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 320
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -4, y: 30}
+        - {x: -8, y: 30}
+        - {x: -18, y: 13}
+        - {x: -18, y: -23}
+        - {x: -9, y: -31}
+        - {x: 8, y: -31}
+        - {x: 18, y: -26}
+        - {x: 18, y: 18}
+        - {x: 8, y: 25}
+      - - {x: 0, y: 32}
+        - {x: -2, y: 31}
+        - {x: -2, y: 25}
+        - {x: 1, y: 24}
+        - {x: 4, y: 24}
+        - {x: 5, y: 25}
+        - {x: 5, y: 29}
+        - {x: 4, y: 32}
+    - name: fireRed0
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 320
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 4, y: 29}
+        - {x: 1, y: 29}
+        - {x: -2, y: 26}
+        - {x: -5, y: 20}
+        - {x: -4, y: 23}
+        - {x: -4, y: 25}
+        - {x: -6, y: 29}
+        - {x: -18, y: 29}
+        - {x: -18, y: -28}
+        - {x: -15, y: -30}
+        - {x: 7, y: -30}
+        - {x: 21, y: -23}
+        - {x: 21, y: 4}
+        - {x: 19, y: 6}
+      - - {x: 7, y: 24}
+        - {x: 4, y: 21}
+        - {x: 4, y: 19}
+        - {x: 7, y: 16}
+        - {x: 8, y: 16}
+        - {x: 11, y: 19}
+        - {x: 11, y: 21}
+        - {x: 8, y: 24}
+    - name: fireRed1
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 320
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -4, y: 30}
+        - {x: -8, y: 30}
+        - {x: -18, y: 13}
+        - {x: -18, y: -23}
+        - {x: -9, y: -31}
+        - {x: 8, y: -31}
+        - {x: 18, y: -26}
+        - {x: 18, y: 18}
+        - {x: 8, y: 25}
+      - - {x: 0, y: 32}
+        - {x: -2, y: 31}
+        - {x: -2, y: 25}
+        - {x: 1, y: 24}
+        - {x: 4, y: 24}
+        - {x: 5, y: 25}
+        - {x: 5, y: 29}
+        - {x: 4, y: 32}
     outline: []
   spritePackingTag: 
   userData: 

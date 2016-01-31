@@ -23,8 +23,9 @@ public abstract class DoAbstractWorldGenerator
     public GameObject[] singleTileBlockersPrefabs;
     public GameObject pentagramPrefab;
     public GameObject smallPortal;
-
-    protected List<GameObject>[,] spawnedGameObjects;
+    public GameObject[] coloredPortals;
+    public GameObject playerPrefab;
+    public GameObject[] enemyPrefabs;
 
 
     public void Start()
@@ -34,15 +35,6 @@ public abstract class DoAbstractWorldGenerator
         CurWorld = new DoWorld(width, height);
         NextWorld = new DoWorld(width, height);
 
-        spawnedGameObjects = new List<GameObject>[width, height];
-
-        for (int i = 0; i < width; i++)
-        {
-            for (int j = 0; j < height; j++)
-            {
-                spawnedGameObjects[i, j] = new List<GameObject>();
-            }
-        }
     }
 
 
@@ -96,46 +88,19 @@ public abstract class DoAbstractWorldGenerator
         MyInit();
     }
 
-    protected GameObject MyInstantiateObject(GameObject obj, int i, int j)
-    {
-        GameObject spawnedObj = (GameObject)GameObject.Instantiate(obj);
-
-        spawnedGameObjects[i, j].Add(spawnedObj);
-
-        spawnedObj.transform.parent = gameObject.transform;
-        spawnedObj.transform.position = new Vector3(i, j, 0);
-
-        return spawnedObj;
-    }
 
 
-    protected void DeleteSpawnedGameObjects()
-    {
-        for (int i = 0; i < width; i++)
-        {
-            for (int j = 0; j < height; j++)
-            {
-                for (int k = 0; k < spawnedGameObjects[i, j].Count; k++)
-                {
-                    GameObject.Destroy(spawnedGameObjects[i, j][k]);
-                }
-
-                spawnedGameObjects[i, j].Clear();
-
-            }
-        }        
-    }
 
     protected abstract void MyInit();
 
     public abstract void DoSteps();
 
 
-    public void InterpretLevel()
+    public void InterpretLevel(WorldManager manager)
     {
-        DeleteSpawnedGameObjects();
-
         Debug.Assert(CurWorld != null);
+
+        int portalCount = 0;
 
         for (int i = 0; i < CurWorld.WorldWidth; i++)
         {
@@ -146,19 +111,24 @@ public abstract class DoAbstractWorldGenerator
                 DoTile curTile = CurWorld.GetTileAt(i, j);
 
                 //create ground:
-                MyInstantiateObject(groundTilesPrefabs[random.Next(0, groundTilesPrefabs.Length)], i, j);
+                manager.MyInstantiateObject(groundTilesPrefabs[random.Next(0, groundTilesPrefabs.Length)], i, j, false);
 
                 //create solid walls:
                 if (curTile.Type == DoTile.TileType.Obstacle)
                 {
                     int id = CurWorld.GetNeighbourInfo(i, j);
-                    MyInstantiateObject(tilabeObstaclesPrefabs[id], i, j);
+                    manager.MyInstantiateObject(tilabeObstaclesPrefabs[id], i, j, false);
+                }
+
+                else if (curTile.SpawnEnemyHere)
+                {
+                    manager.MyInstantiateObject(enemyPrefabs[random.Next(enemyPrefabs.Length)], i, j, false);
                 }
 
 
                 if (curTile.TopObject == DoTile.ObjectOnTop.Grass)
                 {
-                   GameObject obj = MyInstantiateObject(grasDecoPrefabs[random.Next(grasDecoPrefabs.Length)], i, j);
+                    GameObject obj = manager.MyInstantiateObject(grasDecoPrefabs[random.Next(grasDecoPrefabs.Length)], i, j, false);
 
                    if (RandFloat() < 0.5f)
                        FlipX(obj);
@@ -166,7 +136,7 @@ public abstract class DoAbstractWorldGenerator
 
                 else if (curTile.TopObject == DoTile.ObjectOnTop.SingleBlocker)
                 {
-                    GameObject obj = MyInstantiateObject(singleTileBlockersPrefabs[random.Next(singleTileBlockersPrefabs.Length)], i, j);
+                    GameObject obj = manager.MyInstantiateObject(singleTileBlockersPrefabs[random.Next(singleTileBlockersPrefabs.Length)], i, j, false);
 
                     if (RandFloat() < 0.5f)
                         FlipX(obj);
@@ -175,12 +145,12 @@ public abstract class DoAbstractWorldGenerator
 
                 else if (curTile.TopObject == DoTile.ObjectOnTop.BigPortal)
                 {
-                    MyInstantiateObject(pentagramPrefab, i, j);
+                    manager.MyInstantiateObject(pentagramPrefab, i, j, false);
                 }
 
                 else if (curTile.TopObject == DoTile.ObjectOnTop.Pool)
                 {
-                    GameObject obj = MyInstantiateObject(swampPoolPrefabs, i, j);
+                    GameObject obj = manager.MyInstantiateObject(swampPoolPrefabs, i, j, false);
 
                     if (RandFloat() < 0.5f)
                         FlipX(obj);
@@ -188,8 +158,28 @@ public abstract class DoAbstractWorldGenerator
 
                 else if (curTile.TopObject == DoTile.ObjectOnTop.SmallPortal)
                 {
-                    //TODO:
-                    MyInstantiateObject(smallPortal, i, j);
+
+                    if (portalCount < PortalStoneTarget.NUM_COLORS)
+                    {
+                        GameObject obj = manager.MyInstantiateObject(smallPortal, i, j, false);
+
+                        // obj.ad
+                        GameObject sprite = manager.MyInstantiateObject(coloredPortals[portalCount], i, j, false);
+
+                        sprite.transform.parent = obj.transform;
+                        sprite.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
+
+                        EnemySpawner spawner = obj.GetComponent<EnemySpawner>();
+                        spawner.manager = manager;
+                        spawner.enemies = enemyPrefabs;
+
+                        portalCount++;
+                    }
+                }
+
+                else if (curTile.TopObject == DoTile.ObjectOnTop.Player)
+                {
+                    manager.MyInstantiateObject(playerPrefab, i, j, true);
                 }
 
  

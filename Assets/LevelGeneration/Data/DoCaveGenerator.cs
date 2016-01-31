@@ -28,6 +28,9 @@ public class DoCaveGenerator
     [Range(0.0f, 1.0f)]
     public float singleObstaclesChanceOnObstacles;
 
+    [Range(0.0f, 1.0f)]
+    public float enemyChance;
+
     [Range(1, 50)]
     public int numSteps;
 
@@ -75,7 +78,6 @@ public class DoCaveGenerator
 
         PlaceAllTheStuff(biggestRegion);
         
-      
     }
 
     private void PlaceAllTheStuff(DoRegion biggestRegion)
@@ -96,7 +98,7 @@ public class DoCaveGenerator
                         curTile.TopObject = DoTile.ObjectOnTop.Grass;
 
                     //create obstacle
-                    else if (CurWorld.CountNeighbours(i, j, (x => x.Type == DoTile.TileType.Obstacle)) == 0)
+                    else if (CurWorld.CountNeighbours(i, j, (x => (x.Type == DoTile.TileType.Obstacle || x.TopObject == DoTile.ObjectOnTop.SingleBlocker))) == 0)
                     {
                         if (RandFloat() < singleObstacleChanceOnGround)
                             curTile.TopObject = DoTile.ObjectOnTop.SingleBlocker;
@@ -105,6 +107,14 @@ public class DoCaveGenerator
                     //create pool:
                     else if (RandFloat() < poolSpawnChance)
                         curTile.TopObject = DoTile.ObjectOnTop.Pool;
+
+                    if (curTile.TopObject == DoTile.ObjectOnTop.Grass || curTile.TopObject == DoTile.ObjectOnTop.None)
+                    {
+                        if (RandFloat() < enemyChance)
+                        {
+                            curTile.SpawnEnemyHere = true;
+                        }
+                    }
                 }
 
 
@@ -112,19 +122,19 @@ public class DoCaveGenerator
                 else if (curTile.Type == DoTile.TileType.Obstacle)
                 {
 
-                    //create grass:
+
                     if (CurWorld.HasLowerNeighbour(i, j, DoTile.TileType.Obstacle))
                     {
+                        //create grass:
                         if (RandFloat() < grassOnObstacleChance)
                             curTile.TopObject = DoTile.ObjectOnTop.Grass;
-                    }
 
-                    //create obstacle:
-                    else if (CurWorld.HasLowerNeighbour(i, j, DoTile.TileType.Obstacle))
-                    {
-                        if (RandFloat() < singleObstaclesChanceOnObstacles)
+                        //create obstacle
+                        else if (RandFloat() < singleObstaclesChanceOnObstacles)
                             curTile.TopObject = DoTile.ObjectOnTop.SingleBlocker;
                     }
+
+
 
                 }
 
@@ -137,25 +147,19 @@ public class DoCaveGenerator
         RemoveTilesAround(CurWorld, biggestRegion, bigPortalTile.X, bigPortalTile.Y, 4);
         bigPortalTile.TopObject = DoTile.ObjectOnTop.BigPortal;
 
-
-
         for (int i = 0; i < PortalStoneTarget.NUM_COLORS; i++)
         {
             DoTile smallPortalTile = biggestRegion.GetTile(random.Next(biggestRegion.RegionSize()));
             RemoveTilesAround(CurWorld, biggestRegion, smallPortalTile.X, smallPortalTile.Y, 2);
             smallPortalTile.TopObject = DoTile.ObjectOnTop.SmallPortal;
         }
-   
 
 
+        DoTile playerStartTile = biggestRegion.GetTile(random.Next(biggestRegion.RegionSize()));
+        RemoveTilesAround(CurWorld, biggestRegion, playerStartTile.X, playerStartTile.Y, 4);
+        playerStartTile.TopObject = DoTile.ObjectOnTop.Player;
 
     }
-
- 
-
-   
-
-
 
 
     private List<DoRegion> CalculateRegions()
@@ -250,8 +254,6 @@ public class DoCaveGenerator
 
     public void RemoveTilesAround(DoWorld world, DoRegion biggestRegion, int x, int y, int radius)
     {
-        int half = radius / 2;
-        int secHalf = radius - half;
 
         for (int i = -radius; i <= radius; i++)
         {
@@ -262,12 +264,14 @@ public class DoCaveGenerator
 
                 if (idX >= borderWidth && idY >= borderWidth && idX < world.WorldWidth - borderWidth && idY < world.WorldHeight - borderWidth)
                 {
-
                     int dist = world.GetDistance8Neigh(x, y, idX, idY);
+
                     if (dist <= radius)
                     {
                         world.GetTileAt(idX, idY).Type = DoTile.TileType.Empty;
                         world.GetTileAt(idX, idY).TopObject = DoTile.ObjectOnTop.None;
+
+                        world.GetTileAt(idX, idY).SpawnEnemyHere = false;
 
                         if(biggestRegion != null)
                             biggestRegion.Remove(world.GetTileAt(idX, idY));

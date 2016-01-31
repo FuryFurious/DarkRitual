@@ -4,6 +4,8 @@ using System.Collections;
 public class EnemyBehaviour : MonoBehaviour {
 
 	public bool playerInSight = false;
+
+    [HideInInspector]
 	public GameObject player;
 
 	public int enemyHealth = 10;
@@ -20,7 +22,7 @@ public class EnemyBehaviour : MonoBehaviour {
 	// Attack variables
 	public float attackThreshold_maxValue = 4;
 	float attackThreshold;
-	public int enemyDamage = 10;
+//	public int enemyDamage = 10;
 
 	float speed = 0.5f;
 
@@ -32,11 +34,8 @@ public class EnemyBehaviour : MonoBehaviour {
 		movementDirection = GetNewDirection ();
 
 		attackThreshold = attackThreshold_maxValue;
+	}
 
-	}
-	void Update () {
-		
-	}
 
 	void FixedUpdate () {
 		attackThreshold -= Time.deltaTime;
@@ -52,7 +51,9 @@ public class EnemyBehaviour : MonoBehaviour {
 			if (distance < 1.5f){
 
 				if (attackThreshold < 0.1f) {
-					player.GetComponent<PlayerController>().playerHealth-= enemyDamage;
+					
+                    //TODO: "attack"
+                    //player.GetComponent<Hea>().playerHealth-= enemyDamage;
 					attackThreshold += attackThreshold_maxValue;
 				}
 			}

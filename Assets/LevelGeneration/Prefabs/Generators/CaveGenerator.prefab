@@ -72,7 +72,16 @@ MonoBehaviour:
   singleTileBlockersPrefabs:
   - {fileID: 180524, guid: e31909acb00e2684b89f0d93ca01b16d, type: 2}
   pentagramPrefab: {fileID: 128566, guid: f9a7c0eb7ca620544abe6fbdabcf9c61, type: 2}
-  smallPortal: {fileID: 150086, guid: db4f3a6280cc3e1488d05d2b68a66d42, type: 2}
+  smallPortal: {fileID: 153732, guid: 2d736aacf7bf59e4e95fd5a923d3018a, type: 2}
+  coloredPortals:
+  - {fileID: 172970, guid: 025588d24e1e60840b06216f3ac13cee, type: 2}
+  - {fileID: 172412, guid: d6bbbaf8ae479f147aea61049d71dfa5, type: 2}
+  - {fileID: 158702, guid: dfc96300bbef65740800d13ae03db72f, type: 2}
+  - {fileID: 165950, guid: 3b2f97fd57103c145951fa3a4c750dc6, type: 2}
+  - {fileID: 102648, guid: c6714df787d1e0549aec49ad7a5bb033, type: 2}
+  playerPrefab: {fileID: 164796, guid: 3187b46a6fd3e70408755e5d7daa0440, type: 2}
+  enemyPrefabs:
+  - {fileID: 179902, guid: 0236cbd5bcec93541993e98a217b181e, type: 2}
   obstacleChance: 0.4
   birthLimit: 4
   deathLimit: 3
@@ -82,6 +91,7 @@ MonoBehaviour:
   borderWidth: 2
   singleObstacleChanceOnGround: 0.025
   singleObstaclesChanceOnObstacles: 0.075
+  enemyChance: 0.1
   numSteps: 5
 --- !u!1001 &100100000
 Prefab:

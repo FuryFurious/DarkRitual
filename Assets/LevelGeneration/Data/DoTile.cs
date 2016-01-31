@@ -11,7 +11,9 @@ public class DoTile
 
     public enum TileType { Empty, Obstacle }
 
-    public enum ObjectOnTop { None, Grass, Pool, SingleBlocker, BigPortal, SmallPortal }
+    public enum ObjectOnTop { None, Grass, Pool, SingleBlocker, BigPortal, SmallPortal, Player }
+
+    public bool SpawnEnemyHere;
 
     public DoTile(int x, int y)
     {

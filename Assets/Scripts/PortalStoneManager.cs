@@ -7,6 +7,9 @@ public class PortalStoneManager : MonoBehaviour {
 
     public GameObject portalGameObject;
 
+
+
+
     public void AddColor(PortalStoneTarget.PortalColor usedColors)
     {
         this.neededColors = this.neededColors & (~usedColors);
@@ -16,4 +19,7 @@ public class PortalStoneManager : MonoBehaviour {
             portalGameObject.SetActive(true);
         }
     }
+
+
+
 }

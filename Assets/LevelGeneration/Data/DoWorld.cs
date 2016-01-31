@@ -133,5 +133,10 @@ public class DoWorld
         return Mathf.Abs(x0 - x1) + Mathf.Abs(y0 - y1);
     }
 
+    public int GetDistanceEuclidNeigh(int x0, int y0, int x1, int y1)
+    {
+        return (int)(Mathf.Sqrt((float)(x0 - x1) * (float) (x0 - x1) + (float) (y0 - y1) * (float)(y0 - y1)) + 0.5f);
+    }
+
 
 }
