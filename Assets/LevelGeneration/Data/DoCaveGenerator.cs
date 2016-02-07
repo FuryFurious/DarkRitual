@@ -144,7 +144,7 @@ public class DoCaveGenerator
 
        
         DoTile bigPortalTile = biggestRegion.GetTile( random.Next(biggestRegion.RegionSize()));
-        RemoveTilesAround(CurWorld, biggestRegion, bigPortalTile.X, bigPortalTile.Y, 4);
+        RemoveTilesAround(CurWorld, biggestRegion, bigPortalTile.X, bigPortalTile.Y, 8);
         bigPortalTile.TopObject = DoTile.ObjectOnTop.BigPortal;
 
         for (int i = 0; i < PortalStoneTarget.NUM_COLORS; i++)
@@ -255,6 +255,9 @@ public class DoCaveGenerator
     public void RemoveTilesAround(DoWorld world, DoRegion biggestRegion, int x, int y, int radius)
     {
 
+        if (biggestRegion != null)
+             biggestRegion.Remove(world.GetTileAt(x, y));
+
         for (int i = -radius; i <= radius; i++)
         {
             for (int j = -radius; j <= radius; j++)
@@ -266,15 +269,14 @@ public class DoCaveGenerator
                 {
                     int dist = world.GetDistance8Neigh(x, y, idX, idY);
 
-                    if (dist <= radius)
+                    if (dist <= radius && world.GetTileAt(idX, idY).TopObject != DoTile.ObjectOnTop.Player && world.GetTileAt(idX, idY).TopObject != DoTile.ObjectOnTop.BigPortal && world.GetTileAt(idX, idY).TopObject != DoTile.ObjectOnTop.SingleBlocker && world.GetTileAt(idX, idY).TopObject != DoTile.ObjectOnTop.SmallPortal)
                     {
                         world.GetTileAt(idX, idY).Type = DoTile.TileType.Empty;
                         world.GetTileAt(idX, idY).TopObject = DoTile.ObjectOnTop.None;
 
                         world.GetTileAt(idX, idY).SpawnEnemyHere = false;
 
-                        if(biggestRegion != null)
-                            biggestRegion.Remove(world.GetTileAt(idX, idY));
+                    
                     }
                 }
             }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 
 public class Health : MonoBehaviour 
@@ -14,9 +15,24 @@ public class Health : MonoBehaviour
     private Color oldColor = Color.white;
     private bool restoredColor = false;
 
+
+
     public void DestroyGameObject()
     {
         //TODO: spawn / play dead stuff
+
+        PortalConnection portalConnection = GetComponent<PortalConnection>();
+
+        if (portalConnection)
+        {
+            portalConnection.OnDeath();
+        }
+
+
+        if (gameObject.tag == "Player")
+            SceneManager.LoadScene("defaultScene");
+          
+
         GameObject.Destroy(gameObject);
     }
 

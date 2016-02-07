@@ -36,7 +36,7 @@ public class WorldManager : MonoBehaviour
         else
         {
             //generate new map:
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.P))
             {
                 if (worldGenerator != null)
                 {
@@ -45,6 +45,9 @@ public class WorldManager : MonoBehaviour
                 }
 
             }
+
+            else if (Input.GetKeyDown(KeyCode.Escape))
+                Application.Quit();
         }
 
 

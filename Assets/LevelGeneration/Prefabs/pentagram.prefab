@@ -365,6 +365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToFade: 2
+  triggered: 0
   targetColor: 1
 --- !u!114 &11404576
 MonoBehaviour:
@@ -378,6 +379,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   portalGameObject: {fileID: 158364}
+  bossEnemyPrefab: {fileID: 169982, guid: 9f2bb785eb39d174bb2eda2a7e73a385, type: 2}
 --- !u!114 &11408928
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -390,6 +392,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToFade: 2
+  triggered: 0
   targetColor: 8
 --- !u!114 &11435110
 MonoBehaviour:
@@ -403,6 +406,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToFade: 2
+  triggered: 0
   targetColor: 4
 --- !u!114 &11447132
 MonoBehaviour:
@@ -416,6 +420,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToFade: 2
+  triggered: 0
   targetColor: 16
 --- !u!114 &11457406
 MonoBehaviour:
@@ -466,6 +471,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToFade: 2
+  triggered: 0
   targetColor: 2
 --- !u!198 &19807318
 ParticleSystem:
@@ -8288,6 +8294,10 @@ Prefab:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: bossEnemyPrefab
+      value: 
+      objectReference: {fileID: 169982, guid: 9f2bb785eb39d174bb2eda2a7e73a385, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 128566}

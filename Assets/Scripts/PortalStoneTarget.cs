@@ -13,7 +13,7 @@ public class PortalStoneTarget : MonoBehaviour
     private float totalTimeToFade;
 
     private ParticleSystem particleSystem;
-    private bool triggered;
+    public bool triggered;
 
     [Flags]
     public enum PortalColor 
@@ -26,24 +26,24 @@ public class PortalStoneTarget : MonoBehaviour
         Magenta = 16 
     }
 
-    public PortalColor GetColorFromNumber(int id)
+    public static PortalColor GetColorFromNumber(int id)
     {
         switch (id)
         {
             case 0:
-                return PortalColor.Red;
+                return PortalColor.Blue;
 
             case 1:
-                return PortalColor.Blue;
+                return PortalColor.Green;
 
             case 2:
-                return PortalColor.Blue;
+                return PortalColor.Magenta;
 
             case 3:
-                return PortalColor.Blue;
+                return PortalColor.Red;
 
             case 4:
-                return PortalColor.Blue;
+                return PortalColor.Yellow;
 
             default:
                 break;
@@ -85,22 +85,6 @@ public class PortalStoneTarget : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.tag == "Player")
-        {
-           PortalStoneHolder holder = other.gameObject.GetComponent<PortalStoneHolder>();
-           Debug.Assert(holder != null);
-           if ((holder.color & this.targetColor) != PortalColor.None)
-           {
-               triggered = true;
-           }
-
-     
-          
-
-        }
-    }
 
 
 }

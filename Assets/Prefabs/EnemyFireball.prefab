@@ -75,7 +75,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 2
-  targetTag: Enemy
+  targetTag: Player
   removeOnCollision: 1
 --- !u!114 &11465656
 MonoBehaviour:
@@ -88,7 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 070d1a1b11738a9498e39b54209bc10e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bulletspeed: 10
+  Bulletspeed: 5
   direction: {x: 0, y: 0}
 --- !u!212 &21297768
 SpriteRenderer:
@@ -126,7 +126,15 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: targetTag
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Bulletspeed
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 119554}

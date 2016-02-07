@@ -7,8 +7,12 @@ public class PortalConnection : MonoBehaviour
 
     public PortalStoneTarget.PortalColor color;
 
-    void OnDeath()
+    public void OnDeath()
     {
-        manager.AddColor(color);
+        if (manager)
+        {
+            manager.AddColor(color);
+        }
+          
     }
 }

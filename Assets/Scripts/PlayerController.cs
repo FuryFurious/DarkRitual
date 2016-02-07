@@ -29,8 +29,8 @@ public class PlayerController : MonoBehaviour {
 
 	void FixedUpdate () {
 		// Axis movement
-		float axisH = Input.GetAxis ("Horizontal");
-		float axisV = Input.GetAxis ("Vertical");
+		float axisH = Input.GetAxisRaw ("Horizontal");
+		float axisV = Input.GetAxisRaw ("Vertical");
 		// Mouse input
 		mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		mousePosition.z = 0;

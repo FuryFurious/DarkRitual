@@ -31,6 +31,9 @@ public class EnemyBehaviour_Ranged : MonoBehaviour {
 
 	public float speed = 1.0f;
 
+    public float timeSpeedUp = 1.0f;
+
+
 	// Use this for initialization
 	void Start () {
 		//playerDistance = gameObject.transform.child gameObject.GetComponent<
@@ -46,7 +49,7 @@ public class EnemyBehaviour_Ranged : MonoBehaviour {
 
 
 	void FixedUpdate () {
-		attackThreshold -= Time.deltaTime;
+		attackThreshold -= Time.deltaTime * timeSpeedUp;
 		if (attackThreshold < 0)
 			attackThreshold = 0;
 

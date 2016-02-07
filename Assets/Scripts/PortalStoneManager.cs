@@ -8,6 +8,7 @@ public class PortalStoneManager : MonoBehaviour {
     public GameObject portalGameObject;
 
 
+    public GameObject bossEnemyPrefab;
 
 
     public void AddColor(PortalStoneTarget.PortalColor usedColors)
@@ -17,6 +18,10 @@ public class PortalStoneManager : MonoBehaviour {
         if (this.neededColors == PortalStoneTarget.PortalColor.None)
         {
             portalGameObject.SetActive(true);
+
+           GameObject spawned = (GameObject) GameObject.Instantiate(bossEnemyPrefab);
+           spawned.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, 0.0f);
+
         }
     }
 

@@ -102,7 +102,8 @@ public abstract class DoAbstractWorldGenerator
 
         int portalCount = 0;
 
-
+        List<PortalConnection> connections = new List<PortalConnection>();
+        PortalStoneManager portalManager = null;
 
 
         for (int i = 0; i < CurWorld.WorldWidth; i++)
@@ -148,7 +149,10 @@ public abstract class DoAbstractWorldGenerator
 
                 else if (curTile.TopObject == DoTile.ObjectOnTop.BigPortal)
                 {
-                    manager.MyInstantiateObject(pentagramPrefab, i, j, false);
+                    GameObject obj = manager.MyInstantiateObject(pentagramPrefab, i, j, false);
+
+
+                    portalManager = obj.GetComponent<PortalStoneManager>();
                 }
 
                 else if (curTile.TopObject == DoTile.ObjectOnTop.Pool)
@@ -167,7 +171,7 @@ public abstract class DoAbstractWorldGenerator
                         GameObject obj = manager.MyInstantiateObject(smallPortal, i, j, false);
 
                         PortalConnection portalConnection = obj.GetComponent<PortalConnection>();
-                    //   portalConnection.color = (int)PortalStoneTarget.PortalColor;
+                        portalConnection.color = PortalStoneTarget.GetColorFromNumber(portalCount);
 
                         // obj.ad
                         GameObject sprite = manager.MyInstantiateObject(coloredPortals[portalCount], i, j, false);
@@ -183,6 +187,9 @@ public abstract class DoAbstractWorldGenerator
                         obj.GetComponent<Health>().renderer = sprite.GetComponent<SpriteRenderer>();
 
                         portalCount++;
+
+                        connections.Add(portalConnection);
+                        
                     }
                 }
 
@@ -196,6 +203,19 @@ public abstract class DoAbstractWorldGenerator
         }
 
 
+
+        Debug.Assert(portalManager);
+
+        if (connections.Count <= 4)
+        {
+            Init();
+            DoSteps();
+        }
+
+        for (int i = 0; i < connections.Count; i++)
+        {
+            connections[i].manager = portalManager;
+        }
 
     }
 

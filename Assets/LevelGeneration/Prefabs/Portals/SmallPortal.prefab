@@ -101,9 +101,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc7df0670c442f54e83b44848f0d7846, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minSpawnTime: 5
-  maxSpawnTime: 25
-  spawnChance: 0
+  minSpawnTime: 1
+  maxSpawnTime: 5
+  spawnChance: 0.8
   manager: {fileID: 0}
   enemies: []
 --- !u!1001 &100100000
@@ -115,15 +115,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: minSpawnTime
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: maxSpawnTime
-      value: 25
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: spawnChance
-      value: 0
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Layer
