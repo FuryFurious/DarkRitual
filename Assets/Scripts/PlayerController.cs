@@ -1,10 +1,12 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Networking;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Animator))]
-public class PlayerController : MonoBehaviour {
+public class PlayerController : NetworkBehaviour
+{
 
 	public int playerHealth = 100;
 	public float speed = 2f;
@@ -18,60 +20,88 @@ public class PlayerController : MonoBehaviour {
 
 	public Vector3 mousePosition = new Vector3(0,0,0);
 
-	// Use this for initialization
-	void Start () {
-		sprite = gameObject.GetComponent<SpriteRenderer> ();
+    public GameObject _cameraPrefab;
 
-        spriteAnimator = gameObject.GetComponent<Animator>();
-	}
-	
+    private Camera _myCamera;
 
+    public override void OnStartLocalPlayer()
+    {
+        base.OnStartLocalPlayer();
 
-	void FixedUpdate () {
-		// Axis movement
-		float axisH = Input.GetAxisRaw ("Horizontal");
-		float axisV = Input.GetAxisRaw ("Vertical");
-		// Mouse input
-		mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		mousePosition.z = 0;
-		var heading = mousePosition - gameObject.transform.position;
-		var distance = heading.magnitude;
-		Vector3 direction = heading / distance;
-		//Debug.Log (mousePosition);
-
-		// Shooting via left mouseclick
-		if (Input.GetMouseButtonUp (0)) 
+        if (isLocalPlayer)
         {
-			GameObject spawnedBulled = (GameObject)GameObject.Instantiate (bulletPrefab, gameObject.transform.position, Quaternion.identity);
-			spawnedBulled.GetComponent<Movement> ().direction = direction; 
+            var instance = Instantiate(_cameraPrefab);
+            _myCamera = instance.GetComponent<Camera>();
+            instance.GetComponent<FollowGameObject>().target = gameObject;
 
-//            Mathf.Atan2(direction.y, direction.x);
-            spawnedBulled.transform.rotation = Quaternion.Euler(0.0f, 0.0f, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90.0f);
-		}
-			
-
-		// Move via key input
-        Vector2 movementVector = new Vector2(axisH * speed * Time.deltaTime, axisV * speed * Time.deltaTime);
-        gameObject.transform.Translate(movementVector.x, movementVector.y, 0);
+            sprite = gameObject.GetComponent<SpriteRenderer>();
+            spriteAnimator = gameObject.GetComponent<Animator>();
 
 
-        if (Mathf.Abs(axisH) > 0.25f || Mathf.Abs(axisV) > 0.25f)
-        {
-            spriteAnimator.SetBool("IsMoving", true);
+            GetComponent<Rigidbody2D>().position = GameObject.Find("PlayerSpawnPos(Clone)").transform.position;
         }
 
-        else
+       
+    }
+
+
+    void FixedUpdate()
+    {
+        if (isLocalPlayer)
         {
-            spriteAnimator.SetBool("IsMoving", false);
+            // Axis movement
+            float axisH = Input.GetAxisRaw("Horizontal");
+            float axisV = Input.GetAxisRaw("Vertical");
+            // Mouse input
+            mousePosition = _myCamera.ScreenToWorldPoint(Input.mousePosition);
+            mousePosition.z = 0;
+            var heading = mousePosition - gameObject.transform.position;
+            var distance = heading.magnitude;
+            Vector3 direction = heading / distance;
+            //Debug.Log (mousePosition);
+
+            
+            // Shooting via left mouseclick
+            if (Input.GetMouseButtonUp (0)) 
+                CmdShoot(direction);
+                
+
+            // Move via key input
+            Vector2 movementVector = new Vector2(axisH * speed * Time.deltaTime, axisV * speed * Time.deltaTime);
+            gameObject.transform.Translate(movementVector.x, movementVector.y, 0);
+
+
+            if (Mathf.Abs(axisH) > 0.25f || Mathf.Abs(axisV) > 0.25f)
+            {
+                spriteAnimator.SetBool("IsMoving", true);
+            }
+
+            else
+            {
+                spriteAnimator.SetBool("IsMoving", false);
+            }
+
+
+            // Flip vertically considering movement direction
+            if (heading.x > 0.0f)
+                sprite.flipX = true;
+
+            else if (heading.x < 0.0f)
+                sprite.flipX = false;
+
         }
+    }
 
+    [Command]
+    private void CmdShoot(Vector2 direction)
+    {
+        GameObject spawnedBulled = (GameObject)GameObject.Instantiate(bulletPrefab, gameObject.transform.position, Quaternion.identity);
 
-        // Flip vertically considering movement direction
-        if (heading.x > 0.0f)
-            sprite.flipX = true;
+        //            Mathf.Atan2(direction.y, direction.x);
+        spawnedBulled.transform.rotation = Quaternion.Euler(0.0f, 0.0f, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90.0f);
 
-        else if (heading.x < 0.0f)
-            sprite.flipX = false;
+        spawnedBulled.GetComponent<Rigidbody2D>().velocity = direction * 10.0f;
 
-	}
+        NetworkServer.Spawn(spawnedBulled);
+    }
 }

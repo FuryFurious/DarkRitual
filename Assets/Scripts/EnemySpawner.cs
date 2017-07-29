@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
+using System.Collections.Generic;
 
-public class EnemySpawner : MonoBehaviour 
+public class EnemySpawner : NetworkBehaviour 
 {
 
     public float minSpawnTime;
@@ -18,6 +20,10 @@ public class EnemySpawner : MonoBehaviour
     [HideInInspector]
     public GameObject[] enemies;
 
+    private int numActiveEnemies;
+
+    private List<GameObject> _spawnedEnemies = new List<GameObject>();
+
 
     void Start()
     {
@@ -27,20 +33,39 @@ public class EnemySpawner : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
     {
-        curSpawnTime -= Time.deltaTime;
-
-        if (curSpawnTime < 0.0f)
+        if (isServer)
         {
-            SetSpawnTime();
+            if (numActiveEnemies >= 5)
+                return;
 
-            if(Random.value < spawnChance)
-                SpawnEnemy();
+            curSpawnTime -= Time.deltaTime;
+
+            if (curSpawnTime < 0.0f)
+            {
+                for (int i = _spawnedEnemies.Count - 1; i >= 0; i--)
+                {
+                    if (_spawnedEnemies[i] == null)
+                    {
+                        _spawnedEnemies.RemoveAt(i);
+                        numActiveEnemies--;
+                    }
+                }
+
+                SetSpawnTime();
+
+                if (Random.value < spawnChance)
+                {
+
+                    SpawnEnemy();
+                }
+            }
         }
 	}
 
     private void SpawnEnemy()
     {
-        manager.MyInstantiateObject(enemies[Random.Range(0, enemies.Length)], (int)gameObject.transform.position.x, (int)gameObject.transform.position.y, false);
+        GameObject obj = manager.MyInstantiateObject(enemies[Random.Range(0, enemies.Length)], (int)gameObject.transform.position.x, (int)gameObject.transform.position.y, false);
+        numActiveEnemies++;
     }
 
     void SetSpawnTime()

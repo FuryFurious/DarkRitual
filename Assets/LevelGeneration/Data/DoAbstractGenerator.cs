@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Networking;
 
 public abstract class DoAbstractWorldGenerator
-    : MonoBehaviour
+    : NetworkBehaviour
 {
     public int desiredSeed = -1;
     public int width;
@@ -26,15 +27,15 @@ public abstract class DoAbstractWorldGenerator
     public GameObject[] coloredPortals;
     public GameObject playerPrefab;
     public GameObject[] enemyPrefabs;
+    public GameObject playerSpawnPrefab;
 
 
-    public void Start()
+    public void Awake()
     {
         Debug.Assert(width != 0 && height != 0);
 
         CurWorld = new DoWorld(width, height);
         NextWorld = new DoWorld(width, height);
-
     }
 
 
@@ -132,14 +133,17 @@ public abstract class DoAbstractWorldGenerator
 
                 if (curTile.TopObject == DoTile.ObjectOnTop.Grass)
                 {
+                    
                     GameObject obj = manager.MyInstantiateObject(grasDecoPrefabs[random.Next(grasDecoPrefabs.Length)], i, j, false);
 
                    if (RandFloat() < 0.5f)
                        FlipX(obj);
+                    
                 }
 
                 else if (curTile.TopObject == DoTile.ObjectOnTop.SingleBlocker)
                 {
+                    
                     GameObject obj = manager.MyInstantiateObject(singleTileBlockersPrefabs[random.Next(singleTileBlockersPrefabs.Length)], i, j, false);
 
                     if (RandFloat() < 0.5f)
@@ -157,15 +161,17 @@ public abstract class DoAbstractWorldGenerator
 
                 else if (curTile.TopObject == DoTile.ObjectOnTop.Pool)
                 {
+                    
                     GameObject obj = manager.MyInstantiateObject(swampPoolPrefabs, i, j, false);
 
                     if (RandFloat() < 0.5f)
                         FlipX(obj);
+                     
                 }
 
                 else if (curTile.TopObject == DoTile.ObjectOnTop.SmallPortal)
                 {
-
+                    
                     if (portalCount < PortalStoneTarget.NUM_COLORS)
                     {
                         GameObject obj = manager.MyInstantiateObject(smallPortal, i, j, false);
@@ -191,11 +197,12 @@ public abstract class DoAbstractWorldGenerator
                         connections.Add(portalConnection);
                         
                     }
+                     
                 }
 
                 else if (curTile.TopObject == DoTile.ObjectOnTop.Player)
                 {
-                    manager.MyInstantiateObject(playerPrefab, i, j, true);
+                    manager.MyInstantiateObject(playerSpawnPrefab, i, j, true);
                 }
 
  
@@ -206,17 +213,18 @@ public abstract class DoAbstractWorldGenerator
 
         Debug.Assert(portalManager);
 
+        
         if (connections.Count <= 4)
         {
             Init();
             DoSteps();
         }
-
+      
         for (int i = 0; i < connections.Count; i++)
         {
             connections[i].manager = portalManager;
         }
-
+        
     }
 
     void FlipX(GameObject obj)

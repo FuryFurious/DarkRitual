@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public class EnemyBehaviour : MonoBehaviour {
+public class EnemyBehaviour : NetworkBehaviour {
 
 	public bool playerInSight = false;
 
@@ -32,85 +33,97 @@ public class EnemyBehaviour : MonoBehaviour {
 	public float speed = 1.0f;
 
 	// Use this for initialization
-	void Start () {
-		stepMultiplier = Random.Range(1, 4);
-		movementRange *= stepMultiplier;
-		movementTime = movementRange;
-		movementDirection = GetNewDirection ();
+	void Start () 
+    {
+        if (isServer)
+        {
+            stepMultiplier = Random.Range(1, 4);
+            movementRange *= stepMultiplier;
+            movementTime = movementRange;
+            movementDirection = GetNewDirection();
 
-		attackThreshold = attackThreshold_maxValue;
-		animator = GetComponent<Animator> ();
+            attackThreshold = attackThreshold_maxValue;
+            animator = GetComponent<Animator>();
 
-        spriteRenderer = GetComponent<SpriteRenderer>();
+            spriteRenderer = GetComponent<SpriteRenderer>();
 
-        Debug.Assert(spriteRenderer);
+            Debug.Assert(spriteRenderer);
+        }
 	}
 
 
 	void FixedUpdate () {
-		attackThreshold -= Time.deltaTime;
-		if (attackThreshold < 0)
-			attackThreshold = 0;
+        if (isServer)
+        {
+            attackThreshold -= Time.deltaTime;
+            if (attackThreshold < 0)
+                attackThreshold = 0;
 
-		// Run towards Player if in sight. Does only work with 1 Player right now
-		if (playerInSight) {
-
-            if (player == null)
+            // Run towards Player if in sight. Does only work with 1 Player right now
+            if (playerInSight)
             {
-                playerInSight = false;
-                return;
-            }
 
-			var heading = player.transform.position - gameObject.transform.position;
-			var distance = heading.magnitude;
-
-			// Attack
-			if (distance < 1.5f){
-
-				if (attackThreshold < 0.1f) {
-					
-                    //TODO: "attack"
-                    //player.GetComponent<Hea>().playerHealth-= enemyDamage;
-					attackThreshold += attackThreshold_maxValue;
-				}
-			}
-
-			// Hold distance. Is already done via colliders
-			if (distance > 1f){
-				Vector3 direction = heading / distance;
-				direction.z = 0;
-
-                HandleFlip(direction);
-				gameObject.transform.Translate (direction * Time.deltaTime * speed);
-                animator.SetBool("IsMoving", true);
-			}
-
-      
-		} 
-		else {
-
-            HandleFlip(movementDirection);
-
-			gameObject.transform.Translate (movementDirection * Time.deltaTime * speed, 0);
-			movementTime -= Time.deltaTime;
-			if (movementTime < 0) {
-				if (Random.Range (0, 2) < 1)
+                if (player == null)
                 {
-                    movementDirection = GetNewDirection();
+                    playerInSight = false;
+                    return;
+                }
+
+                var heading = player.transform.position - gameObject.transform.position;
+                var distance = heading.magnitude;
+
+                // Attack
+                if (distance < 1.5f)
+                {
+
+                    if (attackThreshold < 0.1f)
+                    {
+
+                        //TODO: "attack"
+                        //player.GetComponent<Hea>().playerHealth-= enemyDamage;
+                        attackThreshold += attackThreshold_maxValue;
+                    }
+                }
+
+                // Hold distance. Is already done via colliders
+                if (distance > 1f)
+                {
+                    Vector3 direction = heading / distance;
+                    direction.z = 0;
+
+                    HandleFlip(direction);
+                    gameObject.transform.Translate(direction * Time.deltaTime * speed);
                     animator.SetBool("IsMoving", true);
                 }
-					
-                else
+
+
+            }
+            else
+            {
+
+                HandleFlip(movementDirection);
+
+                gameObject.transform.Translate(movementDirection * Time.deltaTime * speed, 0);
+                movementTime -= Time.deltaTime;
+                if (movementTime < 0)
                 {
-                    movementDirection = nullMovement2;
-                    animator.SetBool("IsMoving", false);
+                    if (Random.Range(0, 2) < 1)
+                    {
+                        movementDirection = GetNewDirection();
+                        animator.SetBool("IsMoving", true);
+                    }
+
+                    else
+                    {
+                        movementDirection = nullMovement2;
+                        animator.SetBool("IsMoving", false);
+                    }
+
+                    movementTime = movementRange;
                 }
-			
-				movementTime = movementRange;
-			}
 
-		}
-
+            }
+        }
 
 	}
 

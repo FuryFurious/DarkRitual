@@ -5,10 +5,11 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 498646}
-  - 114: {fileID: 11451348}
+  - component: {fileID: 498646}
+  - component: {fileID: 11451348}
+  - component: {fileID: 114939356441197840}
   m_Layer: 8
   m_Name: CaveGenerator
   m_TagString: Untagged
@@ -28,6 +29,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &11451348
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -83,6 +85,8 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 179902, guid: 0236cbd5bcec93541993e98a217b181e, type: 2}
   - {fileID: 140906, guid: 955e25f9c36604f4eb321343cff1f388, type: 2}
+  playerSpawnPrefab: {fileID: 1987230263404980, guid: 2bbb6f514fbc8f4448c39ddfbd6cbab4,
+    type: 2}
   obstacleChance: 0.4
   birthLimit: 4
   deathLimit: 3
@@ -109,3 +113,35 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 121092}
   m_IsPrefabParent: 1
+--- !u!114 &114939356441197840
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 121092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 35
+    i1: 178
+    i2: 223
+    i3: 155
+    i4: 74
+    i5: 54
+    i6: 173
+    i7: 212
+    i8: 216
+    i9: 93
+    i10: 57
+    i11: 39
+    i12: 224
+    i13: 41
+    i14: 75
+    i15: 50
+  m_ServerOnly: 1
+  m_LocalPlayerAuthority: 0
